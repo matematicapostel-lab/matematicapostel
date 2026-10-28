@@ -1,0 +1,1978 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ecuaciones de Segundo Grado - Aprende Matematica</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#000814;
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+
+#fondo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    background:radial-gradient(circle at center,#0a1f44,#000814);
+}
+
+
+
+.encabezado{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 25px;
+}
+
+.encabezado h1{
+    font-size:45px;
+    margin:0 0 10px;
+    color:white;
+
+    text-shadow:
+        0 0 8px #008cff,
+        0 0 18px #008cff,
+        4px 4px 0 #00152e;
+}
+
+.encabezado p{
+    font-size:20px;
+    margin:0;
+    text-shadow:0 0 8px #008cff;
+}
+
+
+
+.contenido{
+    position:relative;
+    z-index:2;
+    width:85%;
+    max-width:1000px;
+    margin:auto;
+}
+
+
+
+.caja{
+    background:linear-gradient(145deg,#075da8,#003b73);
+    color:white;
+    padding:30px;
+    margin:30px 0;
+    border-radius:20px;
+
+    border:6px solid #000;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 20px #008cff;
+}
+
+.caja h2{
+    color:white;
+    font-size:30px;
+
+    border-bottom:3px solid white;
+    padding-bottom:10px;
+
+    text-shadow:0 0 8px #00aaff;
+}
+
+.caja h3{
+    color:white;
+    font-size:23px;
+
+    text-shadow:0 0 6px #00aaff;
+}
+
+
+
+.definicion{
+    background:#0a3970;
+    padding:20px;
+
+    border-left:6px solid #00aaff;
+    border-radius:10px;
+
+    box-shadow:0 0 12px #008cff;
+}
+
+
+
+.formula{
+    background:linear-gradient(145deg,#0b72c9,#06447f);
+
+    padding:20px;
+    margin:15px 0;
+
+    border-radius:15px;
+    border:4px solid #000;
+
+    text-align:center;
+
+    font-size:25px;
+    color:white;
+    font-weight:bold;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 15px #008cff;
+}
+
+
+
+.ejemplo{
+    background:#062b55;
+
+    padding:20px;
+    margin:20px 0;
+
+    border-radius:15px;
+    border:4px solid #000;
+
+    box-shadow:0 0 12px #008cff;
+}
+
+
+
+.paso{
+    background:#0a3d73;
+    color:white;
+
+    padding:15px;
+    margin:10px 0;
+
+    border-radius:10px;
+
+    border-left:5px solid #00aaff;
+
+    border-top:2px solid #000;
+    border-right:2px solid #000;
+    border-bottom:2px solid #000;
+
+    font-size:18px;
+
+    box-shadow:
+        0 0 8px rgba(0,140,255,0.7);
+}
+
+
+
+.resultado{
+    background:linear-gradient(145deg,#087fca,#075da8);
+
+    padding:18px;
+
+    border-radius:12px;
+    border:4px solid #000;
+
+    font-size:21px;
+    font-weight:bold;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 15px #00aaff;
+}
+
+
+
+.regla{
+    padding:15px;
+
+    background:#082f5c;
+
+    border-radius:10px;
+    border:3px solid #000;
+
+    margin:10px 0;
+
+    box-shadow:0 0 8px #008cff;
+}
+
+
+
+.indicacion{
+    background:#07518f;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    border:4px solid #000;
+    border-left:7px solid #00aaff;
+
+    box-shadow:0 0 15px #008cff;
+}
+
+
+
+.ejercicio{
+    background:linear-gradient(145deg,#064477,#03294f);
+
+    color:white;
+
+    padding:25px;
+    margin:25px 0;
+
+    border-radius:15px;
+    border:5px solid #000;
+
+    box-shadow:
+        6px 7px 0 #000,
+        0 0 15px #008cff;
+}
+
+.ejercicio h3{
+    color:white;
+
+    text-shadow:
+        0 0 8px #00aaff;
+}
+
+
+
+.botones{
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+
+    padding:40px 20px 60px;
+}
+
+.boton{
+    padding:15px 30px;
+
+    border:5px solid #000;
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:18px;
+    font-weight:bold;
+
+    margin:10px;
+
+    background:linear-gradient(145deg,#0b72c9,#003b73);
+
+    color:white;
+
+    box-shadow:
+        6px 7px 0 #000,
+        0 0 15px #008cff;
+
+    text-shadow:
+        0 0 7px #00aaff;
+
+    transition:0.3s;
+}
+
+.boton:hover{
+
+    transform:translateY(-4px) scale(1.05);
+
+    background:linear-gradient(145deg,#1294ff,#075da8);
+
+    box-shadow:
+        7px 8px 0 #000,
+        0 0 25px #00aaff;
+}
+
+.boton:active{
+
+    transform:translateY(3px);
+
+    box-shadow:
+        3px 4px 0 #000,
+        0 0 15px #008cff;
+}
+
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#008cff,#003b73);
+
+    border:3px solid #000;
+
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#00aaff;
+}
+
+
+
+@media(max-width:700px){
+
+    .encabezado h1{
+        font-size:32px;
+    }
+
+    .encabezado p{
+        font-size:17px;
+    }
+
+    .contenido{
+        width:92%;
+    }
+
+    .caja{
+        padding:20px;
+    }
+
+    .caja h2{
+        font-size:24px;
+    }
+
+    .formula{
+        font-size:20px;
+        overflow-x:auto;
+    }
+
+    .boton{
+        width:90%;
+        margin:12px auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+
+<canvas id="fondo"></canvas>
+
+
+
+
+<div class="encabezado">
+
+    <h1>Ecuaciones de Segundo Grado</h1>
+
+    <p>
+        tema 1 - 2do trimestre 
+    </p>
+
+</div>
+
+
+<div class="contenido">
+
+
+
+
+<div class="caja">
+
+<h2>1. Introducción</h2>
+
+<p>
+Las ecuaciones de segundo grado, también llamadas ecuaciones
+cuadráticas, son ecuaciones algebraicas en las que la incógnita
+aparece elevada al cuadrado.
+</p>
+
+<p>
+Por ejemplo:
+</p>
+
+<div class="formula">
+
+x² + 5x + 6 = 0
+
+</div>
+
+<p>
+El mayor exponente de la incógnita es 2, por eso se denomina
+ecuación de segundo grado.
+</p>
+
+<div class="definicion">
+
+<b>Definición:</b>
+
+<p>
+Una ecuación de segundo grado es una ecuación que puede
+expresarse en la forma general:
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+donde <b>a ≠ 0</b>.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>2. Forma general</h2>
+
+<p>
+La forma general de una ecuación de segundo grado es:
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+Cada letra representa un elemento diferente:
+</p>
+
+<div class="regla">
+
+<b>a:</b> coeficiente del término cuadrático.
+
+</div>
+
+<div class="regla">
+
+<b>b:</b> coeficiente del término lineal.
+
+</div>
+
+<div class="regla">
+
+<b>c:</b> término independiente.
+
+</div>
+
+<p>
+Es importante recordar que:
+</p>
+
+<div class="formula">
+
+a ≠ 0
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>3. Identificación de los coeficientes</h2>
+
+<p>
+Observemos la siguiente ecuación:
+</p>
+
+<div class="formula">
+
+3x² + 7x - 10 = 0
+
+</div>
+
+<p>
+Podemos identificar:
+</p>
+
+<div class="regla">
+
+a = 3
+
+</div>
+
+<div class="regla">
+
+b = 7
+
+</div>
+
+<div class="regla">
+
+c = -10
+
+</div>
+
+<p>
+Estos valores serán necesarios cuando utilicemos la fórmula
+general.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>4. Tipos de ecuaciones de segundo grado</h2>
+
+<h3>Ecuación completa</h3>
+
+<p>
+Tiene los tres términos:
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+Ejemplo:
+</p>
+
+<div class="formula">
+
+2x² + 5x - 3 = 0
+
+</div>
+
+
+<h3>Ecuación incompleta sin término independiente</h3>
+
+<div class="formula">
+
+ax² + bx = 0
+
+</div>
+
+<p>
+Ejemplo:
+</p>
+
+<div class="formula">
+
+x² + 4x = 0
+
+</div>
+
+
+<h3>Ecuación incompleta sin término lineal</h3>
+
+<div class="formula">
+
+ax² + c = 0
+
+</div>
+
+<p>
+Ejemplo:
+</p>
+
+<div class="formula">
+
+x² - 25 = 0
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>5. Métodos para resolver ecuaciones cuadráticas</h2>
+
+<p>
+Existen diferentes métodos para resolver una ecuación de segundo
+grado.
+</p>
+
+<div class="regla">
+Factorización.
+</div>
+
+<div class="regla">
+Extracción de raíz cuadrada.
+</div>
+
+<div class="regla">
+Fórmula general.
+</div>
+
+<div class="regla">
+Completando el cuadrado.
+</div>
+
+<p>
+El método que utilizaremos con mayor frecuencia será la
+<b>fórmula general</b>.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>6. Fórmula general</h2>
+
+<p>
+Para una ecuación:
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+utilizamos la siguiente fórmula:
+</p>
+
+<div class="formula">
+
+x = (-b ± √(b² - 4ac)) / 2a
+
+</div>
+
+<p>
+El símbolo <b>±</b> significa que debemos realizar dos
+operaciones: una utilizando el signo + y otra utilizando el signo -.
+</p>
+
+<div class="indicacion">
+
+<b>Indicaciones:</b>
+
+<p>
+Antes de utilizar la fórmula general identifica correctamente
+los valores de <b>a</b>, <b>b</b> y <b>c</b>.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>7. El discriminante</h2>
+
+<p>
+La expresión que aparece dentro de la raíz cuadrada se llama
+<b>discriminante</b>.
+</p>
+
+<div class="formula">
+
+Δ = b² - 4ac
+
+</div>
+
+<p>
+El discriminante permite saber cuántas soluciones reales tiene
+una ecuación.
+</p>
+
+<div class="regla">
+
+<b>Si Δ > 0:</b> existen dos soluciones reales diferentes.
+
+</div>
+
+<div class="regla">
+
+<b>Si Δ = 0:</b> existe una solución real doble.
+
+</div>
+
+<div class="regla">
+
+<b>Si Δ < 0:</b> no existen soluciones reales.
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>8. Ejemplo básico por factorización</h2>
+
+<div class="ejemplo">
+
+<h3>Ejemplo: x² + 5x + 6 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Buscamos dos números que multiplicados den 6
+y sumados den 5.
+</p>
+
+<div class="paso">
+
+2 × 3 = 6
+
+<br>
+
+2 + 3 = 5
+
+</div>
+
+<p>
+<b>Paso 2:</b> Factorizamos.
+</p>
+
+<div class="paso">
+
+(x + 2)(x + 3) = 0
+
+</div>
+
+<p>
+<b>Paso 3:</b> Igualamos cada factor a cero.
+</p>
+
+<div class="paso">
+
+x + 2 = 0
+
+<br>
+
+x + 3 = 0
+
+</div>
+
+<p>
+<b>Paso 4:</b> Despejamos.
+</p>
+
+<div class="paso">
+
+x₁ = -2
+
+<br>
+
+x₂ = -3
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = -2 y x₂ = -3
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>9. Ejemplo por extracción de raíz</h2>
+
+<div class="ejemplo">
+
+<h3>Ejemplo: x² - 25 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Pasamos 25 al otro miembro.
+</p>
+
+<div class="paso">
+
+x² = 25
+
+</div>
+
+<p>
+<b>Paso 2:</b> Aplicamos raíz cuadrada.
+</p>
+
+<div class="paso">
+
+x = ±√25
+
+</div>
+
+<p>
+<b>Paso 3:</b>
+</p>
+
+<div class="paso">
+
+x = ±5
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 5 y x₂ = -5
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>10. Ejemplo con fórmula general</h2>
+
+<div class="ejemplo">
+
+<h3>Ejemplo: x² - 5x + 6 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Identificamos a, b y c.
+</p>
+
+<div class="paso">
+
+a = 1
+
+<br>
+
+b = -5
+
+<br>
+
+c = 6
+
+</div>
+
+<p>
+<b>Paso 2:</b> Aplicamos la fórmula.
+</p>
+
+<div class="paso">
+
+x = (-b ± √(b² - 4ac)) / 2a
+
+</div>
+
+<p>
+<b>Paso 3:</b> Sustituimos los valores.
+</p>
+
+<div class="paso">
+
+x = (5 ± √((-5)² - 4(1)(6))) / 2
+
+</div>
+
+<p>
+<b>Paso 4:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+(-5)² - 4(1)(6)
+
+<br><br>
+
+25 - 24 = 1
+
+</div>
+
+<p>
+<b>Paso 5:</b> Sustituimos.
+</p>
+
+<div class="paso">
+
+x = (5 ± √1) / 2
+
+</div>
+
+<div class="paso">
+
+x = (5 ± 1) / 2
+
+</div>
+
+<p>
+<b>Paso 6:</b> Obtenemos las dos soluciones.
+</p>
+
+<div class="paso">
+
+x₁ = (5 + 1) / 2 = 3
+
+<br><br>
+
+x₂ = (5 - 1) / 2 = 2
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 3 y x₂ = 2
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>11. Ecuaciones incompletas</h2>
+
+<div class="ejemplo">
+
+<h3>Ejemplo: 2x² - 18 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Pasamos el término independiente.
+</p>
+
+<div class="paso">
+
+2x² = 18
+
+</div>
+
+<p>
+<b>Paso 2:</b> Dividimos entre 2.
+</p>
+
+<div class="paso">
+
+x² = 9
+
+</div>
+
+<p>
+<b>Paso 3:</b> Sacamos raíz cuadrada.
+</p>
+
+<div class="paso">
+
+x = ±3
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 3 y x₂ = -3
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>12. Ejercicios de mayor dificultad</h2>
+
+<div class="indicacion">
+
+<b>Indicaciones:</b>
+
+<p>
+En los siguientes ejercicios utilizaremos varios procedimientos.
+Observa cuidadosamente cada paso.
+</p>
+
+<p>
+Recuerda:
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+Primero identifica los valores de <b>a</b>, <b>b</b> y <b>c</b>.
+Después calcula el discriminante y finalmente encuentra las
+soluciones.
+</p>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1: 2x² + 7x + 3 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Identificamos los coeficientes.
+</p>
+
+<div class="paso">
+
+a = 2
+
+<br>
+
+b = 7
+
+<br>
+
+c = 3
+
+</div>
+
+<p>
+<b>Paso 2:</b> Aplicamos la fórmula general.
+</p>
+
+<div class="paso">
+
+x = (-7 ± √(7² - 4(2)(3))) / 4
+
+</div>
+
+<p>
+<b>Paso 3:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+49 - 24 = 25
+
+</div>
+
+<p>
+<b>Paso 4:</b> Sacamos la raíz.
+</p>
+
+<div class="paso">
+
+√25 = 5
+
+</div>
+
+<p>
+<b>Paso 5:</b> Calculamos las soluciones.
+</p>
+
+<div class="paso">
+
+x₁ = (-7 + 5) / 4
+
+<br>
+
+x₁ = -2 / 4
+
+<br>
+
+x₁ = -1/2
+
+</div>
+
+<div class="paso">
+
+x₂ = (-7 - 5) / 4
+
+<br>
+
+x₂ = -12 / 4
+
+<br>
+
+x₂ = -3
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = -1/2 y x₂ = -3
+
+</div>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2: 3x² - 10x + 3 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Identificamos:
+</p>
+
+<div class="paso">
+
+a = 3
+
+<br>
+
+b = -10
+
+<br>
+
+c = 3
+
+</div>
+
+<p>
+<b>Paso 2:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+Δ = (-10)² - 4(3)(3)
+
+</div>
+
+<div class="paso">
+
+Δ = 100 - 36
+
+</div>
+
+<div class="paso">
+
+Δ = 64
+
+</div>
+
+<p>
+<b>Paso 3:</b> Aplicamos la fórmula.
+</p>
+
+<div class="paso">
+
+x = (10 ± √64) / 6
+
+</div>
+
+<div class="paso">
+
+x = (10 ± 8) / 6
+
+</div>
+
+<p>
+<b>Paso 4:</b> Primera solución.
+</p>
+
+<div class="paso">
+
+x₁ = (10 + 8) / 6
+
+<br>
+
+x₁ = 18 / 6
+
+<br>
+
+x₁ = 3
+
+</div>
+
+<p>
+<b>Paso 5:</b> Segunda solución.
+</p>
+
+<div class="paso">
+
+x₂ = (10 - 8) / 6
+
+<br>
+
+x₂ = 2 / 6
+
+<br>
+
+x₂ = 1/3
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 3 y x₂ = 1/3
+
+</div>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3: 4x² - 4x - 15 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Identificamos los coeficientes.
+</p>
+
+<div class="paso">
+
+a = 4
+
+<br>
+
+b = -4
+
+<br>
+
+c = -15
+
+</div>
+
+<p>
+<b>Paso 2:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+Δ = (-4)² - 4(4)(-15)
+
+</div>
+
+<div class="paso">
+
+Δ = 16 + 240
+
+</div>
+
+<div class="paso">
+
+Δ = 256
+
+</div>
+
+<p>
+<b>Paso 3:</b> Calculamos la raíz.
+</p>
+
+<div class="paso">
+
+√256 = 16
+
+</div>
+
+<p>
+<b>Paso 4:</b> Aplicamos la fórmula.
+</p>
+
+<div class="paso">
+
+x = (4 ± 16) / 8
+
+</div>
+
+<p>
+<b>Paso 5:</b> Primera solución.
+</p>
+
+<div class="paso">
+
+x₁ = (4 + 16) / 8
+
+<br>
+
+x₁ = 20 / 8
+
+<br>
+
+x₁ = 5/2
+
+</div>
+
+<p>
+<b>Paso 6:</b> Segunda solución.
+</p>
+
+<div class="paso">
+
+x₂ = (4 - 16) / 8
+
+<br>
+
+x₂ = -12 / 8
+
+<br>
+
+x₂ = -3/2
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 5/2 y x₂ = -3/2
+
+</div>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4: x² + 6x + 10 = 0</h3>
+
+<p>
+Este ejercicio es especial porque el discriminante será negativo.
+</p>
+
+<p>
+<b>Paso 1:</b> Identificamos:
+</p>
+
+<div class="paso">
+
+a = 1
+
+<br>
+
+b = 6
+
+<br>
+
+c = 10
+
+</div>
+
+<p>
+<b>Paso 2:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+Δ = 6² - 4(1)(10)
+
+</div>
+
+<div class="paso">
+
+Δ = 36 - 40
+
+</div>
+
+<div class="paso">
+
+Δ = -4
+
+</div>
+
+<p>
+<b>Paso 3:</b> Como el discriminante es negativo,
+no existen soluciones reales.
+</p>
+
+<div class="resultado">
+
+No existen soluciones reales.
+
+<br><br>
+
+La ecuación tiene soluciones complejas.
+
+</div>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5: 5x² - 20x + 20 = 0</h3>
+
+<p>
+<b>Paso 1:</b> Identificamos:
+</p>
+
+<div class="paso">
+
+a = 5
+
+<br>
+
+b = -20
+
+<br>
+
+c = 20
+
+</div>
+
+<p>
+<b>Paso 2:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+Δ = (-20)² - 4(5)(20)
+
+</div>
+
+<div class="paso">
+
+Δ = 400 - 400
+
+</div>
+
+<div class="paso">
+
+Δ = 0
+
+</div>
+
+<p>
+<b>Paso 3:</b> Como Δ = 0, existe una única solución real.
+</p>
+
+<div class="paso">
+
+x = -(-20) / 2(5)
+
+</div>
+
+<div class="paso">
+
+x = 20 / 10
+
+</div>
+
+<div class="paso">
+
+x = 2
+
+</div>
+
+<div class="resultado">
+
+Solución doble: x = 2
+
+</div>
+
+</div>
+
+
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6: Reto final</h3>
+
+<div class="formula">
+
+6x² + x - 2 = 0
+
+</div>
+
+<p>
+<b>Paso 1:</b> Identificamos:
+</p>
+
+<div class="paso">
+
+a = 6
+
+<br>
+
+b = 1
+
+<br>
+
+c = -2
+
+</div>
+
+<p>
+<b>Paso 2:</b> Calculamos el discriminante.
+</p>
+
+<div class="paso">
+
+Δ = 1² - 4(6)(-2)
+
+</div>
+
+<div class="paso">
+
+Δ = 1 + 48
+
+</div>
+
+<div class="paso">
+
+Δ = 49
+
+</div>
+
+<p>
+<b>Paso 3:</b> Calculamos la raíz.
+</p>
+
+<div class="paso">
+
+√49 = 7
+
+</div>
+
+<p>
+<b>Paso 4:</b> Aplicamos la fórmula general.
+</p>
+
+<div class="paso">
+
+x = (-1 ± 7) / 12
+
+</div>
+
+<p>
+<b>Paso 5:</b> Primera solución.
+</p>
+
+<div class="paso">
+
+x₁ = (-1 + 7) / 12
+
+<br>
+
+x₁ = 6 / 12
+
+<br>
+
+x₁ = 1/2
+
+</div>
+
+<p>
+<b>Paso 6:</b> Segunda solución.
+</p>
+
+<div class="paso">
+
+x₂ = (-1 - 7) / 12
+
+<br>
+
+x₂ = -8 / 12
+
+<br>
+
+x₂ = -2/3
+
+</div>
+
+<div class="resultado">
+
+Soluciones: x₁ = 1/2 y x₂ = -2/3
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>13. Comprobación de las soluciones</h2>
+
+<p>
+Una vez obtenidas las soluciones, podemos comprobarlas
+reemplazándolas en la ecuación original.
+</p>
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+
+x² - 5x + 6 = 0
+
+</div>
+
+<p>
+Obtuvimos:
+</p>
+
+<div class="paso">
+
+x₁ = 3
+
+</div>
+
+<p>
+Reemplazamos:
+</p>
+
+<div class="paso">
+
+3² - 5(3) + 6 = 0
+
+<br><br>
+
+9 - 15 + 6 = 0
+
+<br><br>
+
+0 = 0
+
+</div>
+
+<div class="resultado">
+
+La solución es correcta.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>14. Indicaciones importantes</h2>
+
+<div class="regla">
+Ordena la ecuación antes de comenzar.
+</div>
+
+<div class="regla">
+Procura que la ecuación tenga la forma ax² + bx + c = 0.
+</div>
+
+<div class="regla">
+Identifica correctamente a, b y c.
+</div>
+
+<div class="regla">
+Ten cuidado con los signos negativos.
+</div>
+
+<div class="regla">
+Calcula correctamente el discriminante.
+</div>
+
+<div class="regla">
+Recuerda que el símbolo ± produce dos posibles soluciones.
+</div>
+
+<div class="regla">
+Simplifica las respuestas cuando sea posible.
+</div>
+
+<div class="regla">
+Comprueba las soluciones en la ecuación original.
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>15. Resumen del tema</h2>
+
+<p>
+Las ecuaciones de segundo grado son ecuaciones donde la mayor
+potencia de la incógnita es 2.
+</p>
+
+<div class="formula">
+
+ax² + bx + c = 0
+
+</div>
+
+<p>
+La fórmula general permite encontrar sus soluciones:
+</p>
+
+<div class="formula">
+
+x = (-b ± √(b² - 4ac)) / 2a
+
+</div>
+
+<p>
+El discriminante es:
+</p>
+
+<div class="formula">
+
+Δ = b² - 4ac
+
+</div>
+
+<p>
+Según su valor podemos saber el tipo de solución:
+</p>
+
+<div class="regla">
+
+<b>Δ > 0:</b> dos soluciones reales diferentes.
+
+</div>
+
+<div class="regla">
+
+<b>Δ = 0:</b> una solución real doble.
+
+</div>
+
+<div class="regla">
+
+<b>Δ < 0:</b> no existen soluciones reales.
+
+</div>
+
+<div class="resultado">
+
+Objetivo principal: resolver ecuaciones de segundo grado
+utilizando correctamente los diferentes métodos.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="botones"> 
+ 
+<button class="boton" onclick="location.href='1yo.html'"> 
+ 
+Volver a Temas 
+ 
+</button> 
+ 
+<button class="boton" onclick="location.href='index.html'"> 
+ 
+Inicio 
+ 
+</button> 
+ 
+</div>
+
+
+
+<script>
+
+const canvas = document.getElementById("fondo");
+
+const ctx = canvas.getContext("2d");
+
+let estrellas = [];
+let simbolos = [];
+
+
+
+
+function ajustarCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+ajustarCanvas();
+
+window.addEventListener("resize", ajustarCanvas);
+
+
+
+
+for(let i = 0; i < 150; i++){
+
+    estrellas.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        tamaño:Math.random() * 2 + 0.5,
+
+        brillo:Math.random()
+
+    });
+
+}
+
+
+
+
+const signos = [
+
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+
+];
+
+
+for(let i = 0; i < 80; i++){
+
+    simbolos.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        velocidad:Math.random() * 1.5 + 0.5,
+
+        tamaño:Math.random() * 14 + 12,
+
+        signo:
+        signos[Math.floor(Math.random() * signos.length)]
+
+    });
+
+}
+
+
+
+
+function animar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    
+
+    estrellas.forEach(estrella => {
+
+        ctx.fillStyle =
+        "rgba(255,255,255," +
+        (0.3 + estrella.brillo * 0.7) +
+        ")";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            estrella.x,
+            estrella.y,
+            estrella.tamaño,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    });
+
+
+    
+
+    simbolos.forEach(simbolo => {
+
+        ctx.font =
+        simbolo.tamaño + "px Arial";
+
+        ctx.fillStyle =
+        "rgba(0,160,255,0.65)";
+
+        ctx.fillText(
+            simbolo.signo,
+            simbolo.x,
+            simbolo.y
+        );
+
+
+        simbolo.y += simbolo.velocidad;
+
+
+        if(simbolo.y > canvas.height + 30){
+
+            simbolo.y = -30;
+
+            simbolo.x =
+            Math.random() * canvas.width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animar);
+
+}
+
+animar();
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function esProfesor() {
+      return request.auth != null
+        && request.auth.token.email.lower() == 'matematicapostel@gmail.com';
+    }
+
+    function enlaceGoogleValido(url) {
+      return url is string
+        && url.size() <= 2000
+        && url.matches('^https://(docs|drive)\\.google\\.com/.+');
+    }
+
+    function publicacionValida() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['tipo','trimestre','temaId','titulo','descripcion','enlace','fechaEntrega','autor','creado'])
+        && d.tipo in ['Tema','Práctica','Tarea','Aviso']
+        && d.trimestre in ['1er Trimestre','2do Trimestre','3er Trimestre']
+        && d.temaId in ['ecuaciones-algebraicas','numeros-complejos','ecuaciones-segundo-grado','desigualdades-inecuaciones','progresiones','matematica-financiera','ninguno']
+        && d.titulo is string && d.titulo.size() > 0 && d.titulo.size() <= 120
+        && d.descripcion is string && d.descripcion.size() > 0 && d.descripcion.size() <= 2000
+        && enlaceGoogleValido(d.enlace)
+        && d.fechaEntrega is string && d.fechaEntrega.size() <= 10
+        && d.autor is string && d.autor.lower() == 'matematicapostel@gmail.com'
+        && d.creado == request.time;
+    }
+
+    function comentarioValido() {
+      let d = request.resource.data;
+      return d.keys().hasOnly(['nombre','curso','opinion','calificacion','creado'])
+        && d.nombre is string && d.nombre.size() > 0 && d.nombre.size() <= 100
+        && d.curso in ['4to A','4to B']
+        && d.opinion is string && d.opinion.size() > 0 && d.opinion.size() <= 2000
+        && d.calificacion is int && d.calificacion >= 1 && d.calificacion <= 5
+        && d.creado == request.time;
+    }
+
+    match /publicaciones/{id} {
+      allow read: if true;
+      allow create: if esProfesor() && publicacionValida();
+      allow update: if esProfesor() && publicacionValida();
+      allow delete: if esProfesor();
+    }
+
+    match /comentarios/{id} {
+      allow read: if true;
+      allow create: if comentarioValido();
+      allow update: if false;
+      allow delete: if esProfesor();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

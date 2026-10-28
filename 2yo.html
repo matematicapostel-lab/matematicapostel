@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Ejercicios - Aprende Matematica</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#000814;
+    color:white;
+    text-align:center;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+}
+
+body > *:not(canvas){
+    position:relative;
+    z-index:2;
+}
+
+h1{
+    font-size:45px;
+    margin-top:50px;
+    margin-bottom:30px;
+    color:white;
+
+    text-shadow:
+        0 0 5px #0066ff,
+        0 0 10px #0066ff,
+        0 0 20px #0066ff,
+        2px 2px 0 #003b8f;
+}
+
+.contenedor{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin:40px;
+}
+
+.card{
+    width:250px;
+    padding:30px;
+    cursor:pointer;
+    border-radius:20px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b5fd1 0%,
+            #0a2d70 50%,
+            #061a40 100%
+        );
+
+    color:white;
+
+    border:8px solid #000;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 10px #005eff,
+        0 0 20px rgba(0,100,255,0.8);
+
+    transition:0.3s;
+}
+
+.card h2{
+    margin-top:5px;
+    margin-bottom:15px;
+    font-size:28px;
+
+    color:white;
+
+    text-shadow:
+        0 0 4px #0066ff,
+        0 0 8px #0066ff,
+        2px 2px 0 #003b8f;
+}
+
+.card p{
+    font-size:18px;
+    color:white;
+
+    text-shadow:
+        0 0 4px #0066ff,
+        0 0 8px #0066ff;
+}
+
+.card:hover{
+    transform:scale(1.05);
+
+    box-shadow:
+        10px 12px 0 #000,
+        0 0 15px #0077ff,
+        0 0 30px #0066ff,
+        0 0 45px rgba(0,100,255,0.7);
+}
+
+.titulo-trimestre{
+    margin-top:50px;
+    font-size:38px;
+}
+
+.titulo-tema{
+    font-size:30px;
+    margin-top:40px;
+    margin-bottom:20px;
+    color:#7fc7ff;
+
+    text-shadow:
+        0 0 5px #0066ff,
+        0 0 10px #0066ff;
+}
+
+.ejercicio{
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b5fd1 0%,
+            #0a2d70 50%,
+            #061a40 100%
+        );
+
+    color:white;
+
+    width:550px;
+    max-width:80%;
+
+    margin:25px auto;
+    padding:25px;
+
+    border-radius:20px;
+
+    border:8px solid #000;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 10px #005eff,
+        0 0 20px rgba(0,100,255,0.8);
+}
+
+.ejercicio h3{
+
+    color:white;
+    font-size:24px;
+
+    text-shadow:
+        0 0 4px #0066ff,
+        0 0 8px #0066ff,
+        2px 2px 0 #003b8f;
+}
+
+.ejercicio p{
+
+    color:white;
+    font-size:18px;
+
+    text-shadow:
+        0 0 4px #0066ff;
+}
+
+.ejercicio input{
+
+    padding:10px;
+
+    font-size:18px;
+
+    width:220px;
+
+    text-align:center;
+
+    margin:10px;
+
+    border-radius:8px;
+
+    border:4px solid #000;
+
+    outline:none;
+}
+
+
+.ejercicio button{
+
+    padding:10px 20px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+    border-radius:10px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b5fd1,
+            #0645c5
+        );
+
+    border:5px solid #000;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 8px #0066ff;
+
+    text-shadow:
+        0 0 5px #0066ff;
+
+    transition:0.3s;
+}
+
+.ejercicio button:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+        7px 8px 0 #000,
+        0 0 15px #0066ff;
+}
+
+.resultado{
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+    font-size:18px;
+
+    color:white;
+
+    text-shadow:
+        0 0 5px #0066ff,
+        0 0 10px #0066ff;
+}
+
+
+.boton-solucion{
+
+    display:none;
+
+    margin:15px auto;
+
+    padding:12px 22px;
+
+    font-size:17px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #174fae,
+            #06265f
+        );
+
+    border:4px solid #000;
+
+    border-radius:10px;
+
+    box-shadow:
+        4px 5px 0 #000,
+        0 0 10px #0066ff;
+
+    transition:0.3s;
+}
+
+.boton-solucion:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+        6px 7px 0 #000,
+        0 0 15px #0066ff;
+}
+
+.solucion{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:20px;
+
+    background:#061a40;
+
+    border:3px solid #0066ff;
+
+    border-radius:12px;
+
+    text-align:left;
+
+    line-height:1.6;
+}
+
+.solucion strong{
+    color:#7fc7ff;
+}
+
+.respuesta-final{
+
+    background:#e2f7e9;
+
+    color:#000;
+
+    padding:10px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    text-align:center;
+
+    margin-top:15px;
+}
+
+
+.oculto{
+    display:none;
+}
+
+
+.boton{
+
+    padding:15px 30px;
+
+    margin:30px;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b5fd1 0%,
+            #0a2d70 50%,
+            #061a40 100%
+        );
+
+    border:6px solid #000;
+
+    border-radius:15px;
+
+    box-shadow:
+        6px 8px 0 #000,
+        0 0 10px #0066ff,
+        0 0 20px rgba(0,100,255,0.8);
+
+    text-shadow:
+        0 0 5px #0066ff,
+        0 0 10px #0066ff;
+
+    transition:0.3s;
+}
+
+.boton:hover{
+
+    transform:scale(1.05);
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 15px #0077ff,
+        0 0 30px #0066ff;
+}
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+        linear-gradient(
+            180deg,
+            #1b5fd1,
+            #06327e
+        );
+
+    border:3px solid #000;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 0 8px #0066ff;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<canvas id="canvas"></canvas>
+
+
+<h1>EJERCICIOS DE MATEMÁTICA</h1>
+
+<div class="contenedor">
+
+    <div class="card" onclick="mostrar(1)">
+
+        <h2>1er Trimestre</h2>
+
+        <p>
+            Ver ejercicios
+        </p>
+
+    </div>
+
+
+    <div class="card" onclick="mostrar(2)">
+
+        <h2>2do Trimestre</h2>
+
+        <p>
+            Ver ejercicios
+        </p>
+
+    </div>
+
+
+    <div class="card" onclick="mostrar(3)">
+
+        <h2>3er Trimestre</h2>
+
+        <p>
+            Ver ejercicios
+        </p>
+
+    </div>
+
+</div>
+
+
+<div id="ejercicios" class="oculto">
+
+
+<h1 id="titulo"></h1>
+
+<div id="trimestre1" class="oculto">
+
+
+<h2 class="titulo-tema">
+    Ecuaciones Algebraicas
+</h2>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>4x + 8 = 28</strong>
+</p>
+
+<p>
+¿Cuánto vale x?
+</p>
+
+<input type="number" id="r1">
+
+<br>
+
+<button onclick="comprobar(1)">
+Comprobar
+</button>
+
+<p id="resultado1" class="resultado"></p>
+
+<button
+id="botonSolucion1"
+class="boton-solucion"
+onclick="solucion(1)">
+
+Ver solución
+
+</button>
+
+<div id="solucion1" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+4x + 8 = 28
+</p>
+
+<p>
+Restamos 8:
+</p>
+
+<p>
+4x = 28 - 8
+</p>
+
+<p>
+4x = 20
+</p>
+
+<p>
+Dividimos entre 4:
+</p>
+
+<p>
+x = 20 ÷ 4
+</p>
+
+<p>
+x = 5
+</p>
+
+<div class="respuesta-final">
+Respuesta: x = 5
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>7x - 12 = 30</strong>
+</p>
+
+<p>
+¿Cuánto vale x?
+</p>
+
+<input type="number" id="r2">
+
+<br>
+
+<button onclick="comprobar(2)">
+Comprobar
+</button>
+
+<p id="resultado2" class="resultado"></p>
+
+<button
+id="botonSolucion2"
+class="boton-solucion"
+onclick="solucion(2)">
+
+Ver solución
+
+</button>
+
+<div id="solucion2" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+7x - 12 = 30
+</p>
+
+<p>
+Sumamos 12:
+</p>
+
+<p>
+7x = 42
+</p>
+
+<p>
+Dividimos entre 7:
+</p>
+
+<p>
+x = 6
+</p>
+
+<div class="respuesta-final">
+Respuesta: x = 6
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>5(x + 2) = 35</strong>
+</p>
+
+<p>
+¿Cuánto vale x?
+</p>
+
+<input type="number" id="r3">
+
+<br>
+
+<button onclick="comprobar(3)">
+Comprobar
+</button>
+
+<p id="resultado3" class="resultado"></p>
+
+<button
+id="botonSolucion3"
+class="boton-solucion"
+onclick="solucion(3)">
+
+Ver solución
+
+</button>
+
+<div id="solucion3" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+5(x + 2) = 35
+</p>
+
+<p>
+Dividimos entre 5:
+</p>
+
+<p>
+x + 2 = 7
+</p>
+
+<p>
+Restamos 2:
+</p>
+
+<p>
+x = 5
+</p>
+
+<div class="respuesta-final">
+Respuesta: x = 5
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="titulo-tema">
+    Números Imaginarios y Complejos
+</h2>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4</h3>
+
+<p>
+Calcula:
+</p>
+
+<p>
+<strong>i² + 10</strong>
+</p>
+
+<p>
+Recuerda: i² = -1
+</p>
+
+<input type="text" id="r4">
+
+<br>
+
+<button onclick="comprobar(4)">
+Comprobar
+</button>
+
+<p id="resultado4" class="resultado"></p>
+
+<button
+id="botonSolucion4"
+class="boton-solucion"
+onclick="solucion(4)">
+
+Ver solución
+
+</button>
+
+<div id="solucion4" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+i² + 10
+</p>
+
+<p>
+Como:
+</p>
+
+<p>
+i² = -1
+</p>
+
+<p>
+Sustituimos:
+</p>
+
+<p>
+-1 + 10 = 9
+</p>
+
+<div class="respuesta-final">
+Respuesta: 9
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5</h3>
+
+<p>
+Calcula:
+</p>
+
+<p>
+<strong>i³</strong>
+</p>
+
+<p>
+Recuerda que i² = -1.
+</p>
+
+<input type="text" id="r5">
+
+<br>
+
+<button onclick="comprobar(5)">
+Comprobar
+</button>
+
+<p id="resultado5" class="resultado"></p>
+
+<button
+id="botonSolucion5"
+class="boton-solucion"
+onclick="solucion(5)">
+
+Ver solución
+
+</button>
+
+<div id="solucion5" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+i³ = i² × i
+</p>
+
+<p>
+Como i² = -1:
+</p>
+
+<p>
+i³ = -1 × i
+</p>
+
+<p>
+i³ = -i
+</p>
+
+<div class="respuesta-final">
+Respuesta: -i
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6</h3>
+
+<p>
+Suma los siguientes números complejos:
+</p>
+
+<p>
+<strong>
+(3 + 2i) + (5 + 4i)
+</strong>
+</p>
+
+<p>
+Escribe el resultado.
+</p>
+
+<input type="text" id="r6">
+
+<br>
+
+<button onclick="comprobar(6)">
+Comprobar
+</button>
+
+<p id="resultado6" class="resultado"></p>
+
+<button
+id="botonSolucion6"
+class="boton-solucion"
+onclick="solucion(6)">
+
+Ver solución
+
+</button>
+
+<div id="solucion6" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+(3 + 2i) + (5 + 4i)
+</p>
+
+<p>
+Sumamos las partes reales:
+</p>
+
+<p>
+3 + 5 = 8
+</p>
+
+<p>
+Sumamos las partes imaginarias:
+</p>
+
+<p>
+2i + 4i = 6i
+</p>
+
+<p>
+Resultado:
+</p>
+
+<p>
+8 + 6i
+</p>
+
+<div class="respuesta-final">
+Respuesta: 8 + 6i
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="trimestre2" class="oculto">
+
+
+<h2 class="titulo-tema">
+    Ecuaciones de Segundo Grado
+</h2>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+x² - 5x + 6 = 0
+</strong>
+</p>
+
+<p>
+Escribe las soluciones separadas por coma.
+</p>
+
+<input type="text" id="r7">
+
+<br>
+
+<button onclick="comprobar(7)">
+Comprobar
+</button>
+
+<p id="resultado7" class="resultado"></p>
+
+<button
+id="botonSolucion7"
+class="boton-solucion"
+onclick="solucion(7)">
+
+Ver solución
+
+</button>
+
+<div id="solucion7" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+x² - 5x + 6 = 0
+</p>
+
+<p>
+Factorizamos:
+</p>
+
+<p>
+(x - 2)(x - 3) = 0
+</p>
+
+<p>
+Entonces:
+</p>
+
+<p>
+x - 2 = 0 → x = 2
+</p>
+
+<p>
+x - 3 = 0 → x = 3
+</p>
+
+<div class="respuesta-final">
+Respuestas: x = 2 y x = 3
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+x² - 9 = 0
+</strong>
+</p>
+
+<p>
+Escribe las soluciones separadas por coma.
+</p>
+
+<input type="text" id="r8">
+
+<br>
+
+<button onclick="comprobar(8)">
+Comprobar
+</button>
+
+<p id="resultado8" class="resultado"></p>
+
+<button
+id="botonSolucion8"
+class="boton-solucion"
+onclick="solucion(8)">
+
+Ver solución
+
+</button>
+
+<div id="solucion8" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+x² - 9 = 0
+</p>
+
+<p>
+Sumamos 9:
+</p>
+
+<p>
+x² = 9
+</p>
+
+<p>
+Sacamos raíz:
+</p>
+
+<p>
+x = ±3
+</p>
+
+<div class="respuesta-final">
+Respuestas: x = -3 y x = 3
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+x² - 7x + 12 = 0
+</strong>
+</p>
+
+<p>
+Escribe las soluciones separadas por coma.
+</p>
+
+<input type="text" id="r9">
+
+<br>
+
+<button onclick="comprobar(9)">
+Comprobar
+</button>
+
+<p id="resultado9" class="resultado"></p>
+
+<button
+id="botonSolucion9"
+class="boton-solucion"
+onclick="solucion(9)">
+
+Ver solución
+
+</button>
+
+<div id="solucion9" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+x² - 7x + 12 = 0
+</p>
+
+<p>
+Factorizamos:
+</p>
+
+<p>
+(x - 3)(x - 4) = 0
+</p>
+
+<p>
+Por lo tanto:
+</p>
+
+<p>
+x = 3
+</p>
+
+<p>
+x = 4
+</p>
+
+<div class="respuesta-final">
+Respuestas: x = 3 y x = 4
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="titulo-tema">
+    Desigualdades e Inecuaciones
+</h2>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+3x - 5 &gt; 10
+</strong>
+</p>
+
+<p>
+Escribe el valor límite de x.
+</p>
+
+<input type="number" id="r10">
+
+<br>
+
+<button onclick="comprobar(10)">
+Comprobar
+</button>
+
+<p id="resultado10" class="resultado"></p>
+
+<button
+id="botonSolucion10"
+class="boton-solucion"
+onclick="solucion(10)">
+
+Ver solución
+
+</button>
+
+<div id="solucion10" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+3x - 5 &gt; 10
+</p>
+
+<p>
+Sumamos 5:
+</p>
+
+<p>
+3x &gt; 15
+</p>
+
+<p>
+Dividimos entre 3:
+</p>
+
+<p>
+x &gt; 5
+</p>
+
+<div class="respuesta-final">
+Respuesta: x &gt; 5
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+2x + 4 ≤ 14
+</strong>
+</p>
+
+<p>
+Escribe el valor límite de x.
+</p>
+
+<input type="number" id="r11">
+
+<br>
+
+<button onclick="comprobar(11)">
+Comprobar
+</button>
+
+<p id="resultado11" class="resultado"></p>
+
+<button
+id="botonSolucion11"
+class="boton-solucion"
+onclick="solucion(11)">
+
+Ver solución
+
+</button>
+
+<div id="solucion11" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+2x + 4 ≤ 14
+</p>
+
+<p>
+Restamos 4:
+</p>
+
+<p>
+2x ≤ 10
+</p>
+
+<p>
+Dividimos entre 2:
+</p>
+
+<p>
+x ≤ 5
+</p>
+
+<div class="respuesta-final">
+Respuesta: x ≤ 5
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6</h3>
+
+<p>
+Resuelve:
+</p>
+
+<p>
+<strong>
+5x - 15 ≥ 20
+</strong>
+</p>
+
+<p>
+Escribe el valor límite de x.
+</p>
+
+<input type="number" id="r12">
+
+<br>
+
+<button onclick="comprobar(12)">
+Comprobar
+</button>
+
+<p id="resultado12" class="resultado"></p>
+
+<button
+id="botonSolucion12"
+class="boton-solucion"
+onclick="solucion(12)">
+
+Ver solución
+
+</button>
+
+<div id="solucion12" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+5x - 15 ≥ 20
+</p>
+
+<p>
+Sumamos 15:
+</p>
+
+<p>
+5x ≥ 35
+</p>
+
+<p>
+Dividimos entre 5:
+</p>
+
+<p>
+x ≥ 7
+</p>
+
+<div class="respuesta-final">
+Respuesta: x ≥ 7
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div id="trimestre3" class="oculto">
+
+
+<h2 class="titulo-tema">
+    Progresiones Aritméticas
+</h2>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1</h3>
+
+<p>
+Observa:
+</p>
+
+<p>
+<strong>
+5, 8, 11, 14, ...
+</strong>
+</p>
+
+<p>
+¿Cuál es el quinto término?
+</p>
+
+<input type="number" id="r13">
+
+<br>
+
+<button onclick="comprobar(13)">
+Comprobar
+</button>
+
+<p id="resultado13" class="resultado"></p>
+
+<button
+id="botonSolucion13"
+class="boton-solucion"
+onclick="solucion(13)">
+
+Ver solución
+
+</button>
+
+<div id="solucion13" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+La diferencia es:
+</p>
+
+<p>
+8 - 5 = 3
+</p>
+
+<p>
+Entonces sumamos 3:
+</p>
+
+<p>
+14 + 3 = 17
+</p>
+
+<div class="respuesta-final">
+Quinto término: 17
+</div>
+
+</div>
+
+</div>
+
+
+<!-- EJERCICIO 14 -->
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2</h3>
+
+<p>
+Una progresión aritmética tiene:
+</p>
+
+<p>
+<strong>
+a₁ = 4
+</strong>
+</p>
+
+<p>
+<strong>
+d = 3
+</strong>
+</p>
+
+<p>
+¿Cuál es el octavo término?
+</p>
+
+<input type="number" id="r14">
+
+<br>
+
+<button onclick="comprobar(14)">
+Comprobar
+</button>
+
+<p id="resultado14" class="resultado"></p>
+
+<button
+id="botonSolucion14"
+class="boton-solucion"
+onclick="solucion(14)">
+
+Ver solución
+
+</button>
+
+<div id="solucion14" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+Usamos:
+</p>
+
+<p>
+aₙ = a₁ + (n - 1)d
+</p>
+
+<p>
+a₈ = 4 + (8 - 1)(3)
+</p>
+
+<p>
+a₈ = 4 + 7(3)
+</p>
+
+<p>
+a₈ = 4 + 21
+</p>
+
+<p>
+a₈ = 25
+</p>
+
+<div class="respuesta-final">
+Octavo término: 25
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3</h3>
+
+<p>
+Observa la progresión:
+</p>
+
+<p>
+<strong>
+12, 17, 22, 27, ...
+</strong>
+</p>
+
+<p>
+¿Cuál es el décimo término?
+</p>
+
+<input type="number" id="r15">
+
+<br>
+
+<button onclick="comprobar(15)">
+Comprobar
+</button>
+
+<p id="resultado15" class="resultado"></p>
+
+<button
+id="botonSolucion15"
+class="boton-solucion"
+onclick="solucion(15)">
+
+Ver solución
+
+</button>
+
+<div id="solucion15" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+a₁ = 12
+</p>
+
+<p>
+d = 5
+</p>
+
+<p>
+n = 10
+</p>
+
+<p>
+Usamos:
+</p>
+
+<p>
+aₙ = a₁ + (n - 1)d
+</p>
+
+<p>
+a₁₀ = 12 + (10 - 1)(5)
+</p>
+
+<p>
+a₁₀ = 12 + 45
+</p>
+
+<p>
+a₁₀ = 57
+</p>
+
+<div class="respuesta-final">
+Décimo término: 57
+</div>
+
+</div>
+
+</div>
+
+
+<h2 class="titulo-tema">
+    Progresiones Geométricas
+</h2>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4</h3>
+
+<p>
+Observa:
+</p>
+
+<p>
+<strong>
+2, 6, 18, 54, ...
+</strong>
+</p>
+
+<p>
+¿Cuál es el quinto término?
+</p>
+
+<input type="number" id="r16">
+
+<br>
+
+<button onclick="comprobar(16)">
+Comprobar
+</button>
+
+<p id="resultado16" class="resultado"></p>
+
+<button
+id="botonSolucion16"
+class="boton-solucion"
+onclick="solucion(16)">
+
+Ver solución
+
+</button>
+
+<div id="solucion16" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+La razón es:
+</p>
+
+<p>
+6 ÷ 2 = 3
+</p>
+
+<p>
+Multiplicamos el cuarto término por 3:
+</p>
+
+<p>
+54 × 3 = 162
+</p>
+
+<div class="respuesta-final">
+Quinto término: 162
+</div>
+
+</div>
+
+</div>
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5</h3>
+
+<p>
+Una progresión geométrica tiene:
+</p>
+
+<p>
+<strong>
+a₁ = 3
+</strong>
+</p>
+
+<p>
+<strong>
+r = 2
+</strong>
+</p>
+
+<p>
+¿Cuál es el sexto término?
+</p>
+
+<input type="number" id="r17">
+
+<br>
+
+<button onclick="comprobar(17)">
+Comprobar
+</button>
+
+<p id="resultado17" class="resultado"></p>
+
+<button
+id="botonSolucion17"
+class="boton-solucion"
+onclick="solucion(17)">
+
+Ver solución
+
+</button>
+
+<div id="solucion17" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+Usamos:
+</p>
+
+<p>
+aₙ = a₁ × rⁿ⁻¹
+</p>
+
+<p>
+a₆ = 3 × 2⁵
+</p>
+
+<p>
+2⁵ = 32
+</p>
+
+<p>
+a₆ = 3 × 32
+</p>
+
+<p>
+a₆ = 96
+</p>
+
+<div class="respuesta-final">
+Sexto término: 96
+</div>
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6</h3>
+
+<p>
+Observa:
+</p>
+
+<p>
+<strong>
+5, 15, 45, 135, ...
+</strong>
+</p>
+
+<p>
+¿Cuál es el quinto término?
+</p>
+
+<input type="number" id="r18">
+
+<br>
+
+<button onclick="comprobar(18)">
+Comprobar
+</button>
+
+<p id="resultado18" class="resultado"></p>
+
+<button
+id="botonSolucion18"
+class="boton-solucion"
+onclick="solucion(18)">
+
+Ver solución
+
+</button>
+
+<div id="solucion18" class="solucion">
+
+<strong>Ejercicio resuelto:</strong>
+
+<p>
+La razón es:
+</p>
+
+<p>
+15 ÷ 5 = 3
+</p>
+
+<p>
+Entonces:
+</p>
+
+<p>
+135 × 3 = 405
+</p>
+
+<div class="respuesta-final">
+Quinto término: 405
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<button
+class="boton"
+onclick="location.href='index.html'">
+
+Volver al inicio
+
+</button>
+
+
+<script>
+
+
+const canvas =
+document.getElementById("canvas");
+
+const ctx =
+canvas.getContext("2d");
+
+canvas.width =
+window.innerWidth;
+
+canvas.height =
+window.innerHeight;
+
+
+const simbolos = [
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+];
+
+
+let particulas = [];
+let estrellas = [];
+
+
+class Estrella{
+
+    constructor(){
+
+        this.x =
+        Math.random() *
+        canvas.width;
+
+        this.y =
+        Math.random() *
+        canvas.height;
+
+        this.size =
+        Math.random() * 2;
+
+        this.opacity =
+        Math.random();
+
+    }
+
+    draw(){
+
+        ctx.fillStyle =
+        `rgba(
+            255,
+            255,
+            255,
+            ${this.opacity}
+        )`;
+
+        ctx.beginPath();
+
+        ctx.arc(
+            this.x,
+            this.y,
+            this.size,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    }
+
+}
+
+class Particula{
+
+    constructor(){
+
+        this.reset();
+
+    }
+
+    reset(){
+
+        this.x =
+        Math.random() *
+        canvas.width;
+
+        this.y =
+        Math.random() *
+        canvas.height;
+
+        this.size =
+        Math.random() * 25 + 15;
+
+        this.speedY =
+        Math.random() * 1 + 0.3;
+
+        this.simbolo =
+        simbolos[
+            Math.floor(
+                Math.random() *
+                simbolos.length
+            )
+        ];
+
+        this.opacity =
+        Math.random() * 0.8 + 0.2;
+
+    }
+
+    update(){
+
+        this.y +=
+        this.speedY;
+
+        if(
+            this.y >
+            canvas.height
+        ){
+
+            this.y = -20;
+
+            this.x =
+            Math.random() *
+            canvas.width;
+
+        }
+
+    }
+
+    draw(){
+
+        ctx.fillStyle =
+        `rgba(
+            255,
+            255,
+            255,
+            ${this.opacity}
+        )`;
+
+        ctx.font =
+        this.size +
+        "px Arial";
+
+        ctx.fillText(
+            this.simbolo,
+            this.x,
+            this.y
+        );
+
+    }
+
+}
+
+
+function init(){
+
+    particulas = [];
+    estrellas = [];
+
+
+    for(
+        let i = 0;
+        i < 150;
+        i++
+    ){
+
+        estrellas.push(
+            new Estrella()
+        );
+
+    }
+
+
+    for(
+        let i = 0;
+        i < 80;
+        i++
+    ){
+
+        particulas.push(
+            new Particula()
+        );
+
+    }
+
+}
+
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    estrellas.forEach(
+        e => e.draw()
+    );
+
+
+    particulas.forEach(
+        p => {
+
+            p.update();
+            p.draw();
+
+        }
+    );
+
+
+    requestAnimationFrame(
+        animate
+    );
+
+}
+
+
+init();
+animate();
+
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        canvas.width =
+        window.innerWidth;
+
+        canvas.height =
+        window.innerHeight;
+
+        init();
+
+    }
+);
+
+function mostrar(trimestre){
+
+    document
+    .getElementById("ejercicios")
+    .classList
+    .remove("oculto");
+
+
+    document
+    .getElementById("trimestre1")
+    .classList
+    .add("oculto");
+
+    document
+    .getElementById("trimestre2")
+    .classList
+    .add("oculto");
+
+    document
+    .getElementById("trimestre3")
+    .classList
+    .add("oculto");
+
+
+    let titulo = "";
+
+
+    if(trimestre == 1){
+
+        titulo =
+        "Ejercicios del 1er Trimestre";
+
+        document
+        .getElementById("trimestre1")
+        .classList
+        .remove("oculto");
+
+    }
+
+
+    if(trimestre == 2){
+
+        titulo =
+        "Ejercicios del 2do Trimestre";
+
+        document
+        .getElementById("trimestre2")
+        .classList
+        .remove("oculto");
+
+    }
+
+
+    if(trimestre == 3){
+
+        titulo =
+        "Ejercicios del 3er Trimestre";
+
+        document
+        .getElementById("trimestre3")
+        .classList
+        .remove("oculto");
+
+    }
+
+
+    document
+    .getElementById("titulo")
+    .innerText =
+    titulo;
+
+
+    document
+    .getElementById("ejercicios")
+    .scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+const respuestas = {
+
+    1:"5",
+
+    2:"6",
+
+    3:"5",
+
+    4:"9",
+
+    5:"-i",
+
+    6:"8+6i",
+
+    7:["2,3","3,2"],
+
+    8:["-3,3","3,-3"],
+
+    9:["3,4","4,3"],
+
+    10:"5",
+
+    11:"5",
+
+    12:"7",
+
+    13:"17",
+
+    14:"25",
+
+    15:"57",
+
+    16:"162",
+
+    17:"96",
+
+    18:"405"
+
+};
+
+function comprobar(numero){
+
+    let campo =
+    document.getElementById(
+        "r" + numero
+    );
+
+
+    let respuesta =
+    campo.value
+    .trim()
+    .toLowerCase()
+    .replace(/\s/g,"");
+
+
+    let correcta =
+    respuestas[numero];
+
+
+    let esCorrecta = false;
+
+
+    if(Array.isArray(correcta)){
+
+        esCorrecta =
+        correcta.includes(respuesta);
+
+    }
+
+    else{
+
+        esCorrecta =
+        respuesta ===
+        correcta;
+
+    }
+
+
+    let resultado =
+    document.getElementById(
+        "resultado" + numero
+    );
+
+
+    let boton =
+    document.getElementById(
+        "botonSolucion" + numero
+    );
+
+
+    let solucion =
+    document.getElementById(
+        "solucion" + numero
+    );
+
+
+    if(esCorrecta){
+
+        resultado.innerText =
+        "¡Respuesta correcta!";
+
+        boton.style.display =
+        "none";
+
+        solucion.style.display =
+        "none";
+
+    }
+
+    else{
+
+        resultado.innerText =
+        "Respuesta incorrecta.";
+
+        boton.style.display =
+        "block";
+
+        solucion.style.display =
+        "none";
+
+    }
+
+}
+
+
+function solucion(numero){
+
+    let solucion =
+    document.getElementById(
+        "solucion" + numero
+    );
+
+
+    solucion.style.display =
+    "block";
+
+
+    solucion.scrollIntoView({
+        behavior:"smooth",
+        block:"center"
+    });
+
+}
+
+</script>
+
+
+</body>
+
+</html>

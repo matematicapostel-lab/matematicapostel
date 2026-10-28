@@ -1,0 +1,825 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acerca de nosotros - Aprende Matematica</title>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+    margin:0;
+    padding:40px 20px;
+    font-family:Arial,sans-serif;
+    background:#000814;
+    color:white;
+    overflow-x:hidden;
+}
+
+canvas{
+    position:fixed;
+    inset:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+h1,.perfil-docente,.boton,.zona-comentarios{
+    position:relative;
+    z-index:2;
+}
+
+h1{
+    text-align:center;
+    font-size:45px;
+    margin:10px 0 40px;
+    text-shadow:0 0 5px #0066ff,0 0 20px #0066ff;
+}
+
+.perfil-docente{
+    max-width:1200px;
+    margin:auto;
+    padding:30px;
+    border:8px solid #000;
+    border-radius:20px;
+    background:linear-gradient(180deg,#1b5fd1,#0a2d70 50%,#061a40);
+    box-shadow:8px 10px 0 #000,0 0 20px #005eff;
+}
+
+.fila-superior{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-bottom:25px;
+}
+
+.caja{
+    padding:15px;
+    border:5px solid #000;
+    border-radius:12px;
+    background:linear-gradient(180deg,#174da5,#08285e);
+    box-shadow:5px 6px 0 #000,0 0 8px #0066ff;
+    color:white;
+}
+
+.nombre-docente{
+    width:60%;
+    font-size:24px;
+    font-weight:bold;
+    text-shadow:0 0 10px #0066ff;
+}
+
+.experiencia{
+    width:35%;
+    text-align:center;
+    font-size:20px;
+    text-shadow:0 0 10px #0066ff;
+}
+
+.contenedor-docente{
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.izquierda{width:35%}
+.derecha{width:60%}
+
+.foto-docente{
+    width:250px;
+    height:250px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto;
+    border:7px solid #000;
+    box-shadow:0 0 20px #0066ff;
+}
+
+.foto-docente img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.info-pequena{margin-top:20px}
+.info-pequena .caja{
+    margin-bottom:15px;
+    text-align:center;
+    line-height:1.5;
+}
+
+.caja h3{
+    font-size:24px;
+    margin-top:5px;
+    color:white;
+    text-shadow:0 0 10px #0066ff;
+}
+
+.caja p{
+    font-size:18px;
+    line-height:1.6;
+    text-shadow:0 0 3px #0066ff;
+}
+
+.biografia{min-height:220px}
+.mensaje{margin-top:20px;min-height:180px}
+
+.correo{
+    margin-top:30px;
+    text-align:center;
+    font-size:18px;
+    font-weight:bold;
+    overflow-wrap:anywhere;
+}
+
+.boton{
+    display:block;
+    margin:35px auto 10px;
+    padding:15px 30px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(180deg,#1b5fd1,#0a2d70 50%,#061a40);
+    border:6px solid #000;
+    border-radius:15px;
+    box-shadow:6px 8px 0 #000,0 0 20px #0066ff;
+    text-shadow:0 0 10px #0066ff;
+    transition:.3s;
+}
+
+.boton:hover{
+    transform:scale(1.04);
+    box-shadow:8px 10px 0 #000,0 0 30px #0066ff;
+}
+
+
+.zona-comentarios{
+    max-width:800px;
+    margin:40px auto 25px;
+    text-align:center;
+}
+
+.formulario-opiniones{
+    display:none;
+    max-width:760px;
+    margin:25px auto;
+    padding:28px;
+    text-align:left;
+    border:7px solid #000;
+    border-radius:18px;
+    background:linear-gradient(180deg,#1b5fd1,#0a2d70 55%,#061a40);
+    box-shadow:8px 10px 0 #000,0 0 25px rgba(0,100,255,.8);
+}
+
+.formulario-opiniones.visible{display:block}
+
+.formulario-opiniones h2{
+    text-align:center;
+    text-shadow:0 0 10px #168bff;
+}
+
+.formulario-opiniones p{
+    line-height:1.5;
+}
+
+.formulario-opiniones label.campo{
+    display:block;
+    margin:18px 0 8px;
+    font-weight:bold;
+}
+
+.formulario-opiniones input[type="text"],
+.formulario-opiniones select,
+.formulario-opiniones textarea{
+    width:100%;
+    padding:13px;
+    border:3px solid #000;
+    border-radius:9px;
+    background:#f4f8ff;
+    color:#00132d;
+    font:16px Arial,sans-serif;
+}
+
+.formulario-opiniones textarea{
+    min-height:120px;
+    resize:vertical;
+}
+
+.calificacion-estrellas{
+    display:flex;
+    flex-direction:row-reverse;
+    justify-content:center;
+    gap:7px;
+    margin:15px 0;
+}
+
+.calificacion-estrellas input{
+    position:absolute;
+    opacity:0;
+    width:1px;
+    height:1px;
+}
+
+.calificacion-estrellas label{
+    margin:0;
+    font-size:44px;
+    color:#9aa8bd;
+    cursor:pointer;
+    text-shadow:2px 2px 0 #000;
+}
+
+.calificacion-estrellas label:hover,
+.calificacion-estrellas label:hover ~ label,
+.calificacion-estrellas input:checked ~ label{
+    color:#ffca28;
+}
+
+.calificacion-estrellas input:focus-visible + label{
+    outline:2px solid white;
+}
+
+.ayuda-estrellas{
+    text-align:center;
+    font-size:14px;
+}
+
+.boton-enviar{
+    display:block;
+    margin:25px auto 0;
+    padding:14px 25px;
+    color:white;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(180deg,#1597ff,#0057a8);
+    border:5px solid #000;
+    border-radius:13px;
+    box-shadow:5px 6px 0 #000,0 0 12px #168bff;
+}
+
+.boton-enviar:hover{transform:scale(1.04)}
+
+
+.estado-opinion{
+    margin-top:15px;
+    text-align:center;
+    line-height:1.5;
+    font-weight:bold;
+    overflow-wrap:anywhere;
+}
+.estado-opinion.ok{color:#9dffb0}
+.estado-opinion.error{color:#ffb4b4}
+.boton-enviar:disabled{opacity:.6;cursor:wait;transform:none}
+.opiniones-publicadas{
+    max-width:760px;
+    margin:35px auto 0;
+    text-align:left;
+}
+.opiniones-publicadas h2{
+    text-align:center;
+    text-shadow:0 0 10px #168bff;
+}
+.resumen-opiniones{
+    text-align:center;
+    margin-bottom:18px;
+    font-size:18px;
+}
+.lista-opiniones{
+    display:grid;
+    gap:16px;
+}
+.opinion{
+    padding:16px 18px;
+    border:5px solid #000;
+    border-radius:14px;
+    background:linear-gradient(180deg,#174da5,#08285e);
+    box-shadow:5px 6px 0 #000,0 0 10px #0066ff;
+    overflow-wrap:anywhere;
+}
+.opinion .cabecera{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+    align-items:baseline;
+}
+.opinion .autor{font-weight:bold;font-size:18px}
+.opinion .curso{font-size:14px;color:#cfe3ff}
+.opinion .estrellas{color:#ffca28;font-size:22px;letter-spacing:2px;text-shadow:1px 1px 0 #000}
+.opinion .texto{margin:10px 0 6px;line-height:1.5;white-space:pre-wrap}
+.opinion .fecha{font-size:13px;color:#b7d2ff}
+.opinion .eliminar{
+    margin-top:10px;
+    padding:8px 14px;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    background:linear-gradient(145deg,#c62828,#650b0b);
+    border:4px solid #000;
+    border-radius:10px;
+}
+.estado-moderacion{text-align:center;margin-top:14px;font-size:14px;color:#cfe3ff}
+::-webkit-scrollbar{width:14px}
+::-webkit-scrollbar-track{background:#000814}
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(180deg,#1b5fd1,#06327e);
+    border:3px solid #000;
+    border-radius:10px;
+}
+
+@media(max-width:900px){
+    .contenedor-docente{flex-direction:column}
+    .izquierda,.derecha{width:100%}
+    .fila-superior{flex-direction:column}
+    .nombre-docente,.experiencia{width:100%}
+}
+
+@media(max-width:600px){
+    body{padding:25px 12px}
+    h1{font-size:32px}
+    .perfil-docente{padding:16px}
+    .nombre-docente{font-size:21px}
+    .foto-docente{width:210px;height:210px}
+    .formulario-opiniones{padding:17px}
+    .calificacion-estrellas label{font-size:36px}
+    .boton{max-width:100%;padding:12px 18px}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<h1>Acerca de nosotros</h1>
+
+<div class="perfil-docente">
+
+    <div class="fila-superior">
+        <div class="caja nombre-docente">
+            Nelson Ignacio Murillo
+        </div>
+
+        <div class="caja experiencia">
+            25 años de experiencia
+        </div>
+    </div>
+
+    <div class="contenedor-docente">
+
+        <div class="izquierda">
+
+            <div class="foto-docente">
+    <img src="img/PROF.Nelson.jpeg" alt="Fotografía del docente Nelson Ignacio Murillo">
+            </div>
+
+
+            <div class="info-pequena">
+
+                <div class="caja">
+                    <strong>Especialidad:</strong>
+                    <br><br>
+                    Matemática
+                </div>
+
+                <div class="caja">
+                    <strong>Unidad Educativa:</strong>
+                    <br><br>
+                    Santa Maria Magdalena Postel Secundaria
+                </div>
+
+            </div>
+        </div>
+
+        <div class="derecha">
+
+            <div class="caja biografia">
+                <h3>Biografía</h3>
+                <p>
+                    Me convertí en profesor por la influencia de mis
+                    familiares en primer grado, ya que también eran
+                    profesores e influyeron en mi persona para seguir
+                    esta noble profesión de ser una persona dedicada
+                    a la educación y enseñanza de los jóvenes.
+                </p>
+            </div>
+
+            <div class="caja mensaje">
+                <h3>Mensaje del Docente</h3>
+                <p>
+                    "Las grandes obras son hechas no con la fuerza,
+                    sino con la perseverancia constante"
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="caja correo">
+        Correo electrónico:
+        <br><br>
+        matematicapostel@gmail.com
+    </div>
+
+</div>
+
+
+<div class="zona-comentarios">
+
+    <button type="button" class="boton"
+            id="abrirOpiniones"
+            aria-expanded="false"
+            aria-controls="formularioOpiniones">
+        Comentarios/Opiniones
+    </button>
+
+    <form class="formulario-opiniones"
+          id="formularioOpiniones"
+          novalidate>
+
+        <h2>Comparte tu opinión</h2>
+
+        <p style="text-align:center">
+            ¡Tu opinión nos ayuda a mejorar MATEMATICA Interactiva!
+        </p>
+
+        <input type="text" name="_honey" id="campoHoney"
+               style="display:none"
+               tabindex="-1"
+               autocomplete="off">
+
+        <label class="campo" for="nombreEstudiante">
+            Nombre del estudiante
+        </label>
+
+        <input id="nombreEstudiante"
+               type="text"
+               name="Nombre del estudiante"
+               placeholder="Escribe tu nombre"
+               maxlength="100"
+               autocomplete="name"
+               required>
+
+        <label class="campo" for="cursoEstudiante">
+            Curso
+        </label>
+
+        <select id="cursoEstudiante"
+                name="Curso"
+                required>
+            <option value="" selected disabled>Selecciona tu curso</option>
+            <option value="4to A">4to de secundaria - Paralelo A</option>
+            <option value="4to B">4to de secundaria - Paralelo B</option>
+        </select>
+
+        <label class="campo" for="opinionPagina">
+            ¿Qué te pareció la página?
+        </label>
+
+        <textarea id="opinionPagina"
+                  name="Opinión sobre la página"
+                  placeholder="Escribe tus comentarios o sugerencias..."
+                  maxlength="2000"
+                  required></textarea>
+
+        <label class="campo" style="text-align:center">
+            Calificación de la página
+        </label>
+
+        <div class="calificacion-estrellas"
+             role="radiogroup"
+             aria-label="Calificación de una a cinco estrellas">
+
+            <input id="estrella5" type="radio"
+                   name="Calificación" value="5" required>
+            <label for="estrella5" title="5 estrellas"
+                   aria-label="5 estrellas">★</label>
+
+            <input id="estrella4" type="radio"
+                   name="Calificación" value="4">
+            <label for="estrella4" title="4 estrellas"
+                   aria-label="4 estrellas">★</label>
+
+            <input id="estrella3" type="radio"
+                   name="Calificación" value="3">
+            <label for="estrella3" title="3 estrellas"
+                   aria-label="3 estrellas">★</label>
+
+            <input id="estrella2" type="radio"
+                   name="Calificación" value="2">
+            <label for="estrella2" title="2 estrellas"
+                   aria-label="2 estrellas">★</label>
+
+            <input id="estrella1" type="radio"
+                   name="Calificación" value="1">
+            <label for="estrella1" title="1 estrella"
+                   aria-label="1 estrella">★</label>
+
+        </div>
+
+        <p class="ayuda-estrellas">
+            Selecciona de 1 a 5 estrellas.
+        </p>
+
+        <button type="submit" class="boton-enviar">
+            Enviar opinión
+        </button>
+        <div id="estadoOpinion" class="estado-opinion" role="status" aria-live="polite"></div>
+    </form>
+    <section class="opiniones-publicadas" aria-labelledby="tituloOpiniones">
+        <h2 id="tituloOpiniones">Opiniones de los estudiantes</h2>
+        <div id="resumenOpiniones" class="resumen-opiniones">Cargando opiniones...</div>
+        <div id="listaOpiniones" class="lista-opiniones"></div>
+        <div id="estadoModeracion" class="estado-moderacion"></div>
+    </section>
+</div>
+
+<button class="boton"
+        onclick="location.href='index.html'">
+    Volver al inicio
+</button>
+
+<script>
+
+const botonOpiniones = document.getElementById("abrirOpiniones");
+const formularioOpiniones = document.getElementById("formularioOpiniones");
+
+botonOpiniones.addEventListener("click", function(){
+    const abierto = formularioOpiniones.classList.toggle("visible");
+
+    botonOpiniones.setAttribute("aria-expanded", String(abierto));
+
+    if(abierto){
+        formularioOpiniones.scrollIntoView({
+            behavior:"smooth",
+            block:"start"
+        });
+    }
+});
+
+
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function ajustarCanvas(){
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+
+ajustarCanvas();
+
+const simbolos = ["+","-","×","÷","=","π","√","∞","∑"];
+
+let particulas = [];
+let estrellas = [];
+
+class Estrella{
+    constructor(){
+        this.x = Math.random()*canvas.width;
+        this.y = Math.random()*canvas.height;
+        this.size = Math.random()*2;
+        this.opacity = Math.random();
+    }
+
+    draw(){
+        ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+        ctx.beginPath();
+        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
+        ctx.fill();
+    }
+}
+
+class Particula{
+    constructor(){
+        this.reset();
+        this.y = Math.random()*canvas.height;
+    }
+
+    reset(){
+        this.x = Math.random()*canvas.width;
+        this.y = -20;
+        this.size = Math.random()*25+15;
+        this.speedY = Math.random()*1+0.3;
+        this.simbolo = simbolos[
+            Math.floor(Math.random()*simbolos.length)
+        ];
+        this.opacity = Math.random()*0.8+0.2;
+    }
+
+    update(){
+        this.y += this.speedY;
+
+        if(this.y > canvas.height){
+            this.reset();
+        }
+    }
+
+    draw(){
+        ctx.fillStyle = `rgba(255,255,255,${this.opacity})`;
+        ctx.font = this.size+"px Arial";
+        ctx.fillText(this.simbolo,this.x,this.y);
+    }
+}
+
+function iniciarFondo(){
+    estrellas = [];
+    particulas = [];
+
+    for(let i=0;i<150;i++){
+        estrellas.push(new Estrella());
+    }
+
+    for(let i=0;i<80;i++){
+        particulas.push(new Particula());
+    }
+}
+
+function animarFondo(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    estrellas.forEach(e=>e.draw());
+
+    particulas.forEach(p=>{
+        p.update();
+        p.draw();
+    });
+
+    requestAnimationFrame(animarFondo);
+}
+
+iniciarFondo();
+animarFondo();
+
+window.addEventListener("resize",()=>{
+    ajustarCanvas();
+    iniciarFondo();
+});
+</script>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {getAuth,onAuthStateChanged} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {initializeFirestore,collection,addDoc,deleteDoc,doc,query,orderBy,limit,onSnapshot,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey:"AIzaSyAY8rfLXdbpOoGIBFUAxsBrOz5wpHatoAo",
+ authDomain:"matematicas4to-16265.firebaseapp.com",
+ projectId:"matematicas4to-16265",
+ storageBucket:"matematicas4to-16265.firebasestorage.app",
+ messagingSenderId:"1032472526951",
+ appId:"1:1032472526951:web:e0f67f8733dcc33bb014c2"
+};
+const CORREO_PROFESOR="matematicapostel@gmail.com";
+const COLECCION="comentarios";
+const CORREO_AVISO="matematicapostel@gmail.com";
+const $=id=>document.getElementById(id);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=initializeFirestore(app,{experimentalAutoDetectLongPolling:true});
+let esProfesor=false;
+let opiniones=[];
+
+function mensajeFirebase(err){
+ const m={
+  "permission-denied":"Firebase rechazó la operación. Revisa las reglas de Firestore (colección \""+COLECCION+"\").",
+  "tiempo-agotado":AYUDA_CONEXION,
+  "unavailable":"Sin conexión con Firebase. Revisa tu internet e inténtalo de nuevo.",
+  "failed-precondition":"Firestore no está creado o falta un índice en este proyecto."
+ };
+ return m[err.code]||("Error: "+(err.message||"No se pudo completar la operación."));
+}
+const AYUDA_CONEXION="No hay respuesta de Firebase. Revisa: 1) que Firestore Database esté creado en el proyecto matematicas4to-16265, 2) que las reglas estén publicadas, 3) que abras la página desde un hosting o servidor (http/https) y no con doble clic en el archivo.";
+let conectado=false;
+setTimeout(()=>{
+ if(!conectado)$("resumenOpiniones").textContent=(location.protocol==="file:"?"Estás abriendo la página como archivo local. ":"")+AYUDA_CONEXION;
+},10000);
+
+async function avisarPorCorreo(d){
+ try{
+  const r=await fetch("https://formsubmit.co/ajax/"+CORREO_AVISO,{
+   method:"POST",
+   headers:{"Content-Type":"application/json","Accept":"application/json"},
+   body:JSON.stringify({
+    _subject:"Nueva opinión sobre MATEMATICA Interactiva",
+    _template:"table",
+    _captcha:"false",
+    "Nombre del estudiante":d.nombre,
+    "Curso":d.curso,
+    "Calificación":d.calificacion+" de 5 estrellas",
+    "Opinión sobre la página":d.opinion,
+    "Página":location.href
+   })
+  });
+  let j={};
+  try{j=await r.json();}catch{}
+  console.log("Respuesta de FormSubmit:",r.status,j);
+  if(r.ok&&String(j.success)==="true")return {ok:true};
+  return {ok:false,motivo:j.message||("FormSubmit respondió con el código "+r.status)};
+ }catch(err){
+  console.warn("No se pudo enviar el aviso por correo:",err);
+  return {ok:false,motivo:"no se pudo conectar con FormSubmit (¿abres la página como archivo local o sin internet?)"};
+ }
+}
+function estado(texto,tipo){
+ const e=$("estadoOpinion");
+ e.textContent=texto;
+ e.className="estado-opinion"+(tipo?" "+tipo:"");
+}
+function formatearFecha(ts){
+ if(!ts||!ts.toDate)return "Publicando...";
+ return ts.toDate().toLocaleString("es-BO",{dateStyle:"medium",timeStyle:"short"});
+}
+function dibujarOpiniones(){
+ const lista=$("listaOpiniones");
+ lista.replaceChildren();
+ if(!opiniones.length){
+  $("resumenOpiniones").textContent="Todavía no hay opiniones. ¡Sé el primero en opinar!";
+  return;
+ }
+ const validas=opiniones.filter(o=>o.calificacion>=1&&o.calificacion<=5);
+ const prom=validas.length?validas.reduce((a,o)=>a+o.calificacion,0)/validas.length:0;
+ $("resumenOpiniones").textContent=(validas.length?"Promedio: "+prom.toFixed(1)+" ★ · ":"")+opiniones.length+(opiniones.length===1?" opinión":" opiniones");
+ opiniones.forEach(o=>{
+  const card=document.createElement("article");card.className="opinion";
+  const cab=document.createElement("div");cab.className="cabecera";
+  const quien=document.createElement("div");
+  const autor=document.createElement("span");autor.className="autor";autor.textContent=o.nombre||"Anónimo";
+  const curso=document.createElement("span");curso.className="curso";curso.textContent=o.curso?" · "+o.curso:"";
+  quien.append(autor,curso);
+  const est=document.createElement("span");est.className="estrellas";
+  const n=Math.max(0,Math.min(5,Number(o.calificacion)||0));
+  est.textContent="★".repeat(n)+"☆".repeat(5-n);
+  est.setAttribute("aria-label",n+" de 5 estrellas");
+  cab.append(quien,est);
+  const txt=document.createElement("p");txt.className="texto";txt.textContent=o.opinion||"";
+  const fec=document.createElement("div");fec.className="fecha";fec.textContent=formatearFecha(o.creado);
+  card.append(cab,txt,fec);
+  if(esProfesor){
+   const b=document.createElement("button");b.type="button";b.className="eliminar";b.textContent="Eliminar opinión";
+   b.addEventListener("click",async()=>{
+    if(!confirm("¿Eliminar la opinión de "+(o.nombre||"este estudiante")+"? Esta acción no se puede deshacer."))return;
+    b.disabled=true;
+    try{await deleteDoc(doc(db,COLECCION,o.id));}
+    catch(err){$("estadoModeracion").textContent="No se pudo eliminar. "+mensajeFirebase(err);b.disabled=false;}
+   });
+   card.append(b);
+  }
+  lista.append(card);
+ });
+}
+
+onAuthStateChanged(auth,usuario=>{
+ esProfesor=!!usuario&&usuario.email?.toLowerCase()===CORREO_PROFESOR.toLowerCase();
+ $("estadoModeracion").textContent=esProfesor?"Modo profesor: puedes eliminar opiniones.":"";
+ dibujarOpiniones();
+},()=>{});
+
+onSnapshot(query(collection(db,COLECCION),orderBy("creado","desc"),limit(100)),snap=>{
+ conectado=true;
+ opiniones=snap.docs.map(d=>({id:d.id,...d.data()}));
+ dibujarOpiniones();
+},err=>{
+ conectado=true;
+ $("resumenOpiniones").textContent="No se pudieron cargar las opiniones. "+mensajeFirebase(err);
+});
+
+$("formularioOpiniones").addEventListener("submit",async e=>{
+ e.preventDefault();
+ if($("campoHoney").value)return;
+ const nombre=$("nombreEstudiante").value.trim();
+ const curso=$("cursoEstudiante").value.trim();
+ const opinion=$("opinionPagina").value.trim();
+ const marcada=document.querySelector('input[name="Calificación"]:checked');
+ if(!nombre||!curso||!opinion){estado("Completa nombre, curso y opinión.","error");return;}
+ if(!marcada){estado("Selecciona de 1 a 5 estrellas.","error");return;}
+ let ultimo=0;
+ try{ultimo=Number(localStorage.getItem("ultimaOpinion"))||0;}catch{}
+ if(Date.now()-ultimo<30000){estado("Espera unos segundos antes de enviar otra opinión.","error");return;}
+ const datos={
+  nombre:nombre.slice(0,100),curso:curso.slice(0,80),opinion:opinion.slice(0,2000),
+  calificacion:Number(marcada.value)
+ };
+ try{localStorage.setItem("ultimaOpinion",String(Date.now()));}catch{}
+ estado("Publicando tu opinión...");
+ const envio=addDoc(collection(db,COLECCION),{...datos,creado:serverTimestamp()});
+ e.target.reset();
+ const aviso=setTimeout(()=>estado("Tu opinión se ve aquí, pero Firebase aún no la confirma. "+AYUDA_CONEXION,"error"),15000);
+ envio.then(()=>{
+  clearTimeout(aviso);
+  estado("¡Gracias! Tu opinión fue publicada.","ok");
+  avisarPorCorreo(datos).then(res=>{
+   if(res.ok)estado("¡Gracias! Tu opinión fue publicada y se avisó al profesor por correo.","ok");
+   else estado("Tu opinión fue publicada, pero el aviso por correo no salió: "+res.motivo,"error");
+  });
+ }).catch(err=>{
+  clearTimeout(aviso);
+  estado("No se pudo enviar. "+mensajeFirebase(err),"error");
+ });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1641 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Matemática Financiera - Aprende Matematematica </title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:radial-gradient(circle at center,#0a1f44,#000814);
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+
+
+#fondo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+
+
+
+.encabezado{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:45px 20px 30px;
+}
+
+.encabezado h1{
+    margin:0;
+    font-size:45px;
+    color:white;
+
+    text-shadow:
+        0 0 8px #168cff,
+        0 0 18px #168cff,
+        0 0 30px #0066ff,
+        3px 3px 0 #001b45;
+}
+
+.encabezado p{
+    font-size:21px;
+    color:#d5edff;
+
+    text-shadow:
+        0 0 6px #168cff,
+        0 0 12px #0066ff;
+}
+
+
+
+
+.contenido{
+    position:relative;
+    z-index:2;
+    width:85%;
+    max-width:1000px;
+    margin:auto;
+    padding-bottom:30px;
+}
+
+
+
+
+.caja{
+
+    background:
+        linear-gradient(
+            145deg,
+            #075da8,
+            #003b73
+        );
+
+    padding:30px;
+
+    margin:30px 0;
+
+    border-radius:20px;
+
+    border:7px solid #000;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 15px #0066ff,
+        0 0 30px rgba(0,120,255,0.7);
+}
+
+.caja h2{
+
+    color:white;
+
+    font-size:30px;
+
+    margin-top:0;
+
+    border-bottom:4px solid #63c7ff;
+
+    padding-bottom:10px;
+
+    text-shadow:
+        0 0 6px #168cff,
+        0 0 14px #168cff,
+        2px 2px 0 #001b45;
+}
+
+.caja h3{
+
+    color:#d7f1ff;
+
+    font-size:24px;
+
+    text-shadow:
+        0 0 7px #168cff,
+        2px 2px 0 #001b45;
+}
+
+.caja p{
+
+    font-size:18px;
+
+    line-height:1.7;
+}
+
+
+
+
+.definicion{
+
+    background:
+        linear-gradient(
+            145deg,
+            #168cff,
+            #0750a8
+        );
+
+    color:white;
+
+    padding:20px;
+
+    border:4px solid #000;
+
+    border-radius:12px;
+
+    margin:20px 0;
+
+    line-height:1.6;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 15px rgba(0,140,255,.6);
+
+}
+
+
+
+
+.formula{
+
+    background:
+        linear-gradient(
+            145deg,
+            #1d9cff,
+            #0755b8
+        );
+
+    color:white;
+
+    padding:20px;
+
+    margin:20px 0;
+
+    text-align:center;
+
+    font-size:25px;
+
+    font-weight:bold;
+
+    border:5px solid #000;
+
+    border-radius:12px;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 15px #0066ff;
+
+    text-shadow:
+        0 0 6px #8bd5ff,
+        2px 2px 0 #001b45;
+}
+
+
+
+
+.ejemplo{
+
+    background:
+        linear-gradient(
+            145deg,
+            #1254a0,
+            #062b61
+        );
+
+    padding:22px;
+
+    margin:20px 0;
+
+    border-radius:12px;
+
+    border:5px solid #000;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 12px #0066ff;
+}
+
+.ejemplo h3{
+
+    color:#9bdcff;
+
+    margin-top:0;
+
+    text-shadow:
+        0 0 7px #168cff,
+        2px 2px 0 #001b45;
+}
+
+
+
+
+.paso{
+
+    background:
+        linear-gradient(
+            145deg,
+            #0e72d5,
+            #073b80
+        );
+
+    color:white;
+
+    padding:16px;
+
+    margin:12px 0;
+
+    border:4px solid #000;
+
+    border-radius:10px;
+
+    font-size:17px;
+
+    line-height:1.6;
+
+    box-shadow:
+        4px 5px 0 #000,
+        0 0 10px rgba(0,140,255,.5);
+}
+
+
+
+
+.resultado{
+
+    background:
+        linear-gradient(
+            145deg,
+            #087f63,
+            #03523f
+        );
+
+    color:white;
+
+    padding:18px;
+
+    border-radius:10px;
+
+    border:4px solid #000;
+
+    font-weight:bold;
+
+    margin-top:15px;
+
+    box-shadow:
+        4px 5px 0 #000,
+        0 0 12px rgba(0,255,180,.45);
+
+    text-shadow:
+        0 0 5px #8affdf;
+}
+
+
+
+
+.regla{
+
+    background:
+        linear-gradient(
+            145deg,
+            #104d94,
+            #062b61
+        );
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    border:4px solid #000;
+
+    margin:15px 0;
+
+    line-height:1.6;
+
+    box-shadow:
+        4px 5px 0 #000,
+        0 0 12px rgba(0,140,255,.5);
+}
+
+
+
+
+.indicacion{
+
+    background:
+        linear-gradient(
+            145deg,
+            #0e64ba,
+            #06336e
+        );
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:12px;
+
+    border:4px solid #000;
+
+    border-left:8px solid #ffd24d;
+
+    margin:20px 0;
+
+    line-height:1.6;
+
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 12px rgba(0,140,255,.5);
+}
+
+
+
+
+.botones{
+
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+
+    margin:45px 0;
+}
+
+.boton{
+
+    display:inline-block;
+
+    padding:15px 30px;
+
+    margin:10px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #168cff,
+            #0750b5
+        );
+
+    color:white;
+
+    text-decoration:none;
+
+    border:6px solid #000;
+
+    border-radius:15px;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    box-shadow:
+        6px 8px 0 #000,
+        0 0 15px #0066ff,
+        0 0 25px rgba(0,100,255,.8);
+
+    text-shadow:
+        0 0 6px #63c7ff,
+        2px 2px 0 #001b45;
+
+    transition:.25s;
+}
+
+.boton:hover{
+
+    transform:
+        translateY(-3px)
+        scale(1.05);
+
+    background:
+        linear-gradient(
+            145deg,
+            #28a4ff,
+            #0a63d0
+        );
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 18px #168cff,
+        0 0 35px #0066ff;
+}
+
+
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+    border-left:2px solid #06245a;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:
+        linear-gradient(
+            180deg,
+            #168cff,
+            #063b8c
+        );
+
+    border:3px solid #000814;
+
+    border-radius:10px;
+
+    box-shadow:
+        0 0 10px #168cff;
+}
+
+::-webkit-scrollbar-thumb:hover{
+
+    background:
+        linear-gradient(
+            180deg,
+            #39adff,
+            #0750b5
+        );
+}
+
+
+
+
+@media(max-width:700px){
+
+    .encabezado{
+        padding:30px 15px 20px;
+    }
+
+    .encabezado h1{
+        font-size:32px;
+    }
+
+    .encabezado p{
+        font-size:16px;
+    }
+
+    .contenido{
+        width:92%;
+    }
+
+    .caja{
+
+        padding:20px;
+
+        margin:22px 0;
+
+        border-width:5px;
+
+        box-shadow:
+            6px 7px 0 #000,
+            0 0 16px rgba(0,140,255,.7);
+    }
+
+    .caja h2{
+        font-size:24px;
+    }
+
+    .caja h3{
+        font-size:20px;
+    }
+
+    .caja p{
+        font-size:16px;
+    }
+
+    .formula{
+
+        font-size:20px;
+
+        padding:15px;
+
+        overflow-x:auto;
+    }
+
+    .paso{
+        font-size:16px;
+    }
+
+    .boton{
+
+        font-size:16px;
+
+        padding:12px 18px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+
+<canvas id="fondo"></canvas>
+
+
+
+
+<div class="encabezado">
+
+    <h1>
+        MATEMÁTICA FINANCIERA
+    </h1>
+
+    <p>
+        Tema 2 - 3cer trimestre
+    </p>
+
+</div>
+
+
+<div class="contenido">
+
+
+<div class="caja">
+
+    <h2>
+        ¿Qué es la Matemática Financiera?
+    </h2>
+
+    <div class="definicion">
+
+        La <strong>Matemática Financiera</strong> es la rama de las
+        matemáticas que estudia el valor del dinero a través del tiempo.
+
+        <br><br>
+
+        Se utiliza para analizar situaciones como
+        <strong>ahorros, préstamos, intereses, inversiones,
+        descuentos y pagos</strong>.
+
+    </div>
+
+    <p>
+        En la vida cotidiana podemos encontrar Matemática Financiera
+        cuando una persona solicita un préstamo, deposita dinero en
+        una cuenta de ahorro o compra un producto a crédito.
+    </p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Conceptos fundamentales
+    </h2>
+
+    <h3>Capital</h3>
+
+    <p>
+        El <strong>capital</strong> es la cantidad inicial de dinero
+        que se presta, invierte o deposita.
+    </p>
+
+    <div class="formula">
+        C = Capital inicial
+    </div>
+
+
+    <h3>Interés</h3>
+
+    <p>
+        El <strong>interés</strong> es la cantidad de dinero que se
+        genera por utilizar o invertir un capital durante determinado
+        tiempo.
+    </p>
+
+
+    <h3>Tasa de interés</h3>
+
+    <p>
+        La <strong>tasa de interés</strong> representa el porcentaje
+        aplicado al capital.
+    </p>
+
+
+    <h3>Tiempo</h3>
+
+    <p>
+        El tiempo indica durante cuánto período se mantiene una
+        inversión o préstamo.
+    </p>
+
+
+    <h3>Monto</h3>
+
+    <p>
+        El <strong>monto</strong> es el resultado de sumar el capital
+        inicial más los intereses generados.
+    </p>
+
+    <div class="formula">
+        M = C + I
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Interés Simple
+    </h2>
+
+    <div class="definicion">
+
+        El <strong>interés simple</strong> se calcula siempre sobre
+        el capital inicial. Los intereses obtenidos no se agregan
+        al capital para generar nuevos intereses.
+
+    </div>
+
+    <div class="formula">
+
+        I = C × i × t
+
+    </div>
+
+    <p>
+        Donde:
+    </p>
+
+    <div class="regla">
+
+        <strong>I</strong> = interés<br>
+        <strong>C</strong> = capital<br>
+        <strong>i</strong> = tasa de interés<br>
+        <strong>t</strong> = tiempo
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 1
+        </h3>
+
+        <p>
+            Una persona deposita <strong>Bs 2.000</strong> a una tasa
+            de interés simple del <strong>5%</strong> anual durante
+            <strong>3 años</strong>.
+        </p>
+
+        <div class="paso">
+
+            <strong>Paso 1:</strong>
+            Identificamos los datos.
+
+            <br><br>
+
+            C = 2000
+
+            <br>
+
+            i = 5% = 0,05
+
+            <br>
+
+            t = 3 años
+
+        </div>
+
+        <div class="paso">
+
+            <strong>Paso 2:</strong>
+            Aplicamos la fórmula.
+
+            <br><br>
+
+            I = C × i × t
+
+        </div>
+
+        <div class="paso">
+
+            I = 2000 × 0,05 × 3
+
+            <br><br>
+
+            I = 300
+
+        </div>
+
+        <div class="paso">
+
+            <strong>Paso 3:</strong>
+            Calculamos el monto.
+
+            <br><br>
+
+            M = C + I
+
+            <br>
+
+            M = 2000 + 300
+
+        </div>
+
+        <div class="resultado">
+
+            Monto final = Bs 2.300
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Conversión de porcentajes
+    </h2>
+
+    <p>
+        Para utilizar una tasa de interés en las fórmulas debemos
+        convertir el porcentaje a decimal.
+    </p>
+
+    <div class="formula">
+
+        5% = 5 ÷ 100 = 0,05
+
+    </div>
+
+    <div class="formula">
+
+        12% = 12 ÷ 100 = 0,12
+
+    </div>
+
+    <div class="formula">
+
+        20% = 20 ÷ 100 = 0,20
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>Importante:</strong>
+        Nunca debemos utilizar directamente 5 en lugar de 0,05
+        cuando la tasa está expresada como 5%.
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Cálculo del Monto
+    </h2>
+
+    <p>
+        El monto representa la cantidad total de dinero después de
+        sumar el interés al capital inicial.
+    </p>
+
+    <div class="formula">
+
+        M = C + I
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 2
+        </h3>
+
+        <p>
+            Se invierten <strong>Bs 5.000</strong> y se generan
+            <strong>Bs 750</strong> de interés.
+            ¿Cuál es el monto final?
+        </p>
+
+        <div class="paso">
+
+            M = C + I
+
+            <br><br>
+
+            M = 5000 + 750
+
+        </div>
+
+        <div class="resultado">
+
+            M = Bs 5.750
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Cálculo del Capital
+    </h2>
+
+    <p>
+        Si conocemos el interés, la tasa y el tiempo, podemos
+        despejar el capital de la fórmula del interés simple.
+    </p>
+
+    <div class="formula">
+
+        C = I ÷ (i × t)
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 3
+        </h3>
+
+        <p>
+            Se obtuvo un interés de <strong>Bs 600</strong> con una
+            tasa del <strong>5%</strong> anual durante
+            <strong>2 años</strong>.
+            ¿Cuál fue el capital inicial?
+        </p>
+
+        <div class="paso">
+
+            I = 600
+
+            <br>
+
+            i = 0,05
+
+            <br>
+
+            t = 2
+
+        </div>
+
+        <div class="paso">
+
+            C = I ÷ (i × t)
+
+        </div>
+
+        <div class="paso">
+
+            C = 600 ÷ (0,05 × 2)
+
+            <br><br>
+
+            C = 600 ÷ 0,10
+
+            <br><br>
+
+            C = 6000
+
+        </div>
+
+        <div class="resultado">
+
+            Capital inicial = Bs 6.000
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Cálculo de la Tasa de Interés
+    </h2>
+
+    <p>
+        También podemos calcular la tasa de interés cuando conocemos
+        el capital, el interés y el tiempo.
+    </p>
+
+    <div class="formula">
+
+        i = I ÷ (C × t)
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 4
+        </h3>
+
+        <p>
+            Un capital de <strong>Bs 4.000</strong> produjo
+            <strong>Bs 800</strong> de interés durante
+            <strong>4 años</strong>.
+            ¿Cuál fue la tasa anual?
+        </p>
+
+        <div class="paso">
+
+            i = 800 ÷ (4000 × 4)
+
+        </div>
+
+        <div class="paso">
+
+            i = 800 ÷ 16000
+
+            <br><br>
+
+            i = 0,05
+
+        </div>
+
+        <div class="paso">
+
+            Convertimos a porcentaje:
+
+            <br><br>
+
+            0,05 × 100 = 5%
+
+        </div>
+
+        <div class="resultado">
+
+            Tasa de interés = 5% anual
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Cálculo del Tiempo
+    </h2>
+
+    <p>
+        Si conocemos el capital, la tasa y el interés, podemos
+        calcular el tiempo.
+    </p>
+
+    <div class="formula">
+
+        t = I ÷ (C × i)
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 5
+        </h3>
+
+        <p>
+            Un capital de <strong>Bs 3.000</strong> genera
+            <strong>Bs 450</strong> de interés con una tasa del
+            <strong>5%</strong> anual.
+            ¿Cuánto tiempo estuvo invertido?
+        </p>
+
+        <div class="paso">
+
+            t = 450 ÷ (3000 × 0,05)
+
+        </div>
+
+        <div class="paso">
+
+            t = 450 ÷ 150
+
+            <br><br>
+
+            t = 3
+
+        </div>
+
+        <div class="resultado">
+
+            Tiempo = 3 años
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Interés Compuesto
+    </h2>
+
+    <div class="definicion">
+
+        En el <strong>interés compuesto</strong>, los intereses
+        generados se agregan al capital y posteriormente también
+        generan nuevos intereses.
+
+    </div>
+
+    <div class="formula">
+
+        M = C(1 + i)ⁿ
+
+    </div>
+
+    <div class="regla">
+
+        <strong>M</strong> = monto final<br>
+        <strong>C</strong> = capital inicial<br>
+        <strong>i</strong> = tasa de interés<br>
+        <strong>n</strong> = número de períodos
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 6
+        </h3>
+
+        <p>
+            Se invierten <strong>Bs 1.000</strong> a una tasa de
+            interés compuesto del <strong>10%</strong> anual durante
+            <strong>2 años</strong>.
+        </p>
+
+        <div class="paso">
+
+            C = 1000
+
+            <br>
+
+            i = 0,10
+
+            <br>
+
+            n = 2
+
+        </div>
+
+        <div class="paso">
+
+            Aplicamos:
+
+            <br><br>
+
+            M = C(1 + i)ⁿ
+
+        </div>
+
+        <div class="paso">
+
+            M = 1000(1 + 0,10)²
+
+            <br><br>
+
+            M = 1000(1,10)²
+
+            <br><br>
+
+            M = 1000(1,21)
+
+        </div>
+
+        <div class="paso">
+
+            M = 1210
+
+        </div>
+
+        <div class="resultado">
+
+            Monto final = Bs 1.210
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Interés Simple vs. Interés Compuesto
+    </h2>
+
+    <div class="regla">
+
+        <strong>Interés Simple:</strong>
+
+        <br><br>
+
+        El interés siempre se calcula sobre el capital inicial.
+
+    </div>
+
+    <div class="regla">
+
+        <strong>Interés Compuesto:</strong>
+
+        <br><br>
+
+        Los intereses se incorporan al capital y generan nuevos
+        intereses.
+
+    </div>
+
+    <div class="formula">
+
+        Simple → I = C × i × t
+
+    </div>
+
+    <div class="formula">
+
+        Compuesto → M = C(1 + i)ⁿ
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Descuento
+    </h2>
+
+    <div class="definicion">
+
+        El <strong>descuento</strong> es una reducción aplicada al
+        precio original de un producto o servicio.
+
+    </div>
+
+    <div class="formula">
+
+        Descuento = Precio × Porcentaje
+
+    </div>
+
+
+    <div class="ejemplo">
+
+        <h3>
+            Ejemplo 7
+        </h3>
+
+        <p>
+            Un producto cuesta <strong>Bs 800</strong> y tiene un
+            descuento del <strong>15%</strong>.
+            ¿Cuál es el precio final?
+        </p>
+
+        <div class="paso">
+
+            Convertimos:
+
+            <br><br>
+
+            15% = 0,15
+
+        </div>
+
+        <div class="paso">
+
+            Descuento = 800 × 0,15
+
+            <br><br>
+
+            Descuento = 120
+
+        </div>
+
+        <div class="paso">
+
+            Precio final = 800 - 120
+
+            <br><br>
+
+            Precio final = 680
+
+        </div>
+
+        <div class="resultado">
+
+            Precio final = Bs 680
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Aplicaciones de la Matemática Financiera
+    </h2>
+
+    <p>
+        La Matemática Financiera puede utilizarse para:
+    </p>
+
+    <div class="regla">
+
+        Calcular intereses de préstamos.
+
+    </div>
+
+    <div class="regla">
+
+        Analizar cuentas de ahorro.
+
+    </div>
+
+    <div class="regla">
+
+        Estudiar inversiones.
+
+    </div>
+
+    <div class="regla">
+
+        Calcular descuentos y precios finales.
+
+    </div>
+
+    <div class="regla">
+
+        Analizar compras a crédito.
+
+    </div>
+
+    <div class="regla">
+
+        Comparar diferentes alternativas financieras.
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Indicaciones para resolver problemas
+    </h2>
+
+    <div class="indicacion">
+
+        <strong>1.</strong>
+        Identifica primero los datos que proporciona el problema.
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>2.</strong>
+        Convierte las tasas porcentuales a números decimales.
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>3.</strong>
+        Comprueba que las unidades de tiempo sean compatibles con
+        la tasa.
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>4.</strong>
+        Selecciona la fórmula correspondiente.
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>5.</strong>
+        Sustituye los datos y realiza las operaciones paso a paso.
+
+    </div>
+
+    <div class="indicacion">
+
+        <strong>6.</strong>
+        Comprueba que el resultado tenga sentido.
+
+    </div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+    <h2>
+        Resumen
+    </h2>
+
+    <p>
+        La Matemática Financiera permite estudiar cómo cambia el
+        valor del dinero con el paso del tiempo.
+    </p>
+
+    <div class="formula">
+        I = C × i × t
+    </div>
+
+    <p>
+        Fórmula del interés simple.
+    </p>
+
+    <div class="formula">
+        M = C + I
+    </div>
+
+    <p>
+        Fórmula del monto con interés simple.
+    </p>
+
+    <div class="formula">
+        M = C(1 + i)ⁿ
+    </div>
+
+    <p>
+        Fórmula del monto con interés compuesto.
+    </p>
+
+    <p>
+        Estos conceptos permiten comprender situaciones financieras
+        relacionadas con préstamos, ahorros, inversiones y descuentos.
+    </p>
+
+</div>
+
+
+
+
+<div class="botones">
+
+    <a
+        href="1yo.html"
+        class="boton">
+
+        Volver a Temas
+
+    </a>
+
+
+    <a
+        href="index.html"
+        class="boton">
+
+        Volver al Inicio
+
+    </a>
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+const canvas = document.getElementById("fondo");
+const ctx = canvas.getContext("2d");
+
+
+function resizeCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+resizeCanvas();
+
+window.addEventListener("resize",resizeCanvas);
+
+
+
+
+let estrellas = [];
+
+for(let i=0;i<150;i++){
+
+    estrellas.push({
+
+        x:Math.random()*canvas.width,
+
+        y:Math.random()*canvas.height,
+
+        r:Math.random()*1.5
+
+    });
+
+}
+
+
+
+
+let simbolos = [];
+
+const simbolosMath = [
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+];
+
+
+for(let i=0;i<80;i++){
+
+    simbolos.push({
+
+        x:Math.random()*canvas.width,
+
+        y:Math.random()*canvas.height,
+
+        velocidad:0.5+Math.random()*1.5,
+
+        simbolo:
+            simbolosMath[
+                Math.floor(
+                    Math.random()*simbolosMath.length
+                )
+            ],
+
+        tamaño:16+Math.random()*18
+
+    });
+
+}
+
+
+
+
+function animar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    
+
+    ctx.fillStyle="white";
+
+    estrellas.forEach(e=>{
+
+        ctx.beginPath();
+
+        ctx.arc(
+            e.x,
+            e.y,
+            e.r,
+            0,
+            Math.PI*2
+        );
+
+        ctx.fill();
+
+    });
+
+
+    
+
+    ctx.fillStyle="rgba(80,170,255,0.75)";
+
+    simbolos.forEach(s=>{
+
+        ctx.font =
+            s.tamaño +
+            "px Arial";
+
+        ctx.fillText(
+            s.simbolo,
+            s.x,
+            s.y
+        );
+
+
+        s.y += s.velocidad;
+
+
+        if(
+            s.y >
+            canvas.height + 30
+        ){
+
+            s.y = -30;
+
+            s.x =
+                Math.random() *
+                canvas.width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animar);
+
+}
+
+animar();
+
+</script>
+
+
+</body>
+
+</html>

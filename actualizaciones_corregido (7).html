@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Actualizaciones - MATEMATICA Interactiva</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif;color:#fff;background:radial-gradient(circle at top,#0a1f44,#000814 75%);min-height:100vh}
+canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+header,main,footer{position:relative;z-index:1}
+header{text-align:center;padding:30px 15px}
+header h1{font-size:clamp(28px,5vw,45px);text-shadow:0 0 12px #087bff,0 0 25px #087bff}
+header p{color:#d4e8ff;line-height:1.5}
+main{width:min(1050px,92%);margin:auto}
+.panel{margin:25px 0;padding:25px;border:5px solid #000;border-radius:20px;background:linear-gradient(145deg,#075da8,#00112d);box-shadow:7px 8px 0 #000,0 0 20px #087bff88}
+h2{text-shadow:0 0 10px #1685ff}
+label{display:block;margin:15px 0 7px;font-weight:bold}
+input,select,textarea{width:100%;padding:12px;border:3px solid #000;border-radius:10px;font:inherit;color:#06152b;background:#edf6ff}
+textarea{min-height:100px;resize:vertical}
+button,.boton{display:inline-block;margin-top:15px;padding:13px 20px;border:5px solid #000;border-radius:35px;color:#fff;background:radial-gradient(circle at top,#176cff,#071a45 75%);font-size:15px;font-weight:bold;text-decoration:none;cursor:pointer;box-shadow:5px 6px 0 #000,0 0 15px #087bff88}
+button:hover,.boton:hover{filter:brightness(1.25)}
+button:disabled{opacity:.6;cursor:wait}
+.texto-ayuda{color:#d5e7ff;font-size:14px;line-height:1.5}
+.estado{margin-top:12px;color:#d5e7ff;overflow-wrap:anywhere;line-height:1.5}
+.oculto{display:none!important}
+.lista{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.publicacion{padding:18px;border:4px solid #000;border-radius:15px;background:linear-gradient(145deg,#075da8,#031a3c);box-shadow:5px 6px 0 #000;overflow-wrap:anywhere}
+.publicacion h3{margin:12px 0}
+.publicacion p{white-space:pre-wrap;line-height:1.5}
+.boton-eliminar{background:linear-gradient(145deg,#c62828,#650b0b);color:#fff;border-color:#000}
+.etiqueta{display:inline-block;padding:6px 10px;border:2px solid #000;border-radius:20px;background:#09234c;font-size:12px;font-weight:bold;margin:3px}
+.filtros{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+footer{text-align:center;padding:25px 15px;color:#c5dcff}
+@media(max-width:600px){.panel{padding:16px}button,.boton{width:100%;text-align:center}}
+</style>
+</head>
+<body>
+<canvas id="fondo"></canvas>
+<header>
+<h1>ACTUALIZACIONES</h1>
+<p>MATEMATICA Interactiva<br>Temas, prácticas y tareas publicadas por el profesor</p>
+<a class="boton" href="index.html">VOLVER AL INICIO</a>
+</header>
+<main>
+<section class="panel">
+<h2>Acceso del profesor</h2>
+<p class="texto-ayuda">Solo la cuenta autorizada del profesor podrá publicar materiales. Los estudiantes podrán consultarlos sin iniciar sesión.</p>
+<form id="formLogin">
+<label for="usuario">Usuario</label>
+<input type="text" id="usuario" required placeholder="admin o matematicapostel@gmail.com" autocomplete="username">
+<label for="contrasena">Contraseña</label>
+<input type="password" id="contrasena" required placeholder="Contraseña" autocomplete="current-password">
+<button id="btnLogin" type="submit">INICIAR SESIÓN</button>
+<button id="btnSalir" type="button" class="oculto">CERRAR SESIÓN</button>
+</form>
+<div id="estadoLogin" class="estado" role="status">Conectando con Firebase...</div>
+</section>
+<section class="panel oculto" id="panelProfesor">
+<h2>Publicar tema, práctica o documento</h2>
+<p class="texto-ayuda">Pega un enlace de Google Drive a un documento PDF, Word o PowerPoint. No se suben archivos a Firebase Storage.</p>
+<form id="formPublicar">
+<label for="tipo">Tipo de material</label>
+<select id="tipo" required><option value="Tema">Tema</option><option value="Práctica">Práctica</option><option value="Tarea">Tarea</option><option value="Aviso">Aviso</option></select>
+<label for="trimestre">Trimestre</label>
+<select id="trimestre" required><option value="1er Trimestre">1er Trimestre</option><option value="2do Trimestre">2do Trimestre</option><option value="3er Trimestre">3er Trimestre</option></select>
+<label for="temaId">Tema al que pertenece</label>
+<select id="temaId" required>
+<option value="ecuaciones-algebraicas">Ecuaciones algebraicas</option>
+<option value="numeros-complejos">Números imaginarios y complejos</option>
+<option value="ecuaciones-segundo-grado">Ecuaciones de segundo grado</option>
+<option value="desigualdades-inecuaciones">Desigualdades e inecuaciones</option>
+<option value="progresiones">Progresiones aritméticas y geométricas</option>
+<option value="matematica-financiera">Matemática financiera</option>
+<option value="ninguno">Ninguno</option>
+</select>
+<label for="titulo">Título del material</label>
+<input id="titulo" maxlength="120" required placeholder="Ej.: Práctica de ecuaciones">
+<label for="descripcion">Descripción e instrucciones</label>
+<textarea id="descripcion" maxlength="2000" required placeholder="Escribe las indicaciones para los estudiantes..."></textarea>
+<label for="enlace">Enlace de Google Drive del documento</label>
+<input type="url" id="enlace" required placeholder="https://drive.google.com/...">
+<label for="fecha">Fecha de entrega (opcional)</label>
+<input type="date" id="fecha">
+<button id="btnPublicar" type="submit">PUBLICAR MATERIAL</button>
+</form>
+<div id="estadoPublicar" class="estado" role="status"></div>
+<section class="panel" style="margin-top:25px;background:linear-gradient(145deg,#063d70,#00112d)">
+<h2>Buscar material publicado</h2>
+<p class="texto-ayuda">Esta búsqueda aparece dentro de la sesión del profesor. Los estudiantes siguen viendo los materiales publicados en la sección inferior.</p>
+<div class="filtros">
+<div><label for="filtroTipo">Tipo</label><select id="filtroTipo"><option value="">Todos</option><option value="Tema">Tema</option><option value="Práctica">Práctica</option><option value="Tarea">Tarea</option><option value="Aviso">Aviso</option></select></div>
+<div><label for="filtroTrimestre">Trimestre</label><select id="filtroTrimestre"><option value="">Todos</option><option value="1er Trimestre">1er Trimestre</option><option value="2do Trimestre">2do Trimestre</option><option value="3er Trimestre">3er Trimestre</option></select></div>
+<div><label for="filtroTema">Tema</label><select id="filtroTema"><option value="">Todos los temas</option><option value="ecuaciones-algebraicas">Ecuaciones algebraicas</option><option value="numeros-complejos">Números imaginarios y complejos</option><option value="ecuaciones-segundo-grado">Ecuaciones de segundo grado</option><option value="desigualdades-inecuaciones">Desigualdades e inecuaciones</option><option value="progresiones">Progresiones aritméticas y geométricas</option><option value="matematica-financiera">Matemática financiera</option><option value="ninguno">Ninguno</option></select></div>
+</div>
+<div id="estadoBusqueda" class="estado"></div><div id="listaBusqueda" class="lista"></div>
+</section>
+</section>
+<section class="panel">
+<h2>Material para los estudiantes</h2>
+<div id="estadoMaterial" class="estado">Conectando con Firebase...</div>
+<div id="listaMaterial" class="lista"></div>
+</section>
+</main>
+<footer>MATEMATICA Interactiva · Aprende, practica y mejora</footer>
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-app.js";
+import {getAuth,signInWithEmailAndPassword,onAuthStateChanged,signOut} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-auth.js";
+import {getFirestore,collection,addDoc,deleteDoc,doc,query,orderBy,onSnapshot,serverTimestamp} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js";
+
+const firebaseConfig = {
+ apiKey:"AIzaSyAY8rfLXdbpOoGIBFUAxsBrOz5wpHatoAo",
+ authDomain:"matematicas4to-16265.firebaseapp.com",
+ projectId:"matematicas4to-16265",
+ storageBucket:"matematicas4to-16265.firebasestorage.app",
+ messagingSenderId:"1032472526951",
+ appId:"1:1032472526951:web:e0f67f8733dcc33bb014c2"
+};
+
+const CORREO_PROFESOR="matematicapostel@gmail.com";
+const $=id=>document.getElementById(id);
+const app=initializeApp(firebaseConfig);
+const auth=getAuth(app);
+const db=getFirestore(app);
+let materiales=[];
+const eliminadosLocalmente=new Set();
+
+function actualizarSesion(usuario){
+ const autorizado=!!usuario&&usuario.email?.toLowerCase()===CORREO_PROFESOR.toLowerCase();
+ $("panelProfesor").classList.toggle("oculto",!autorizado);
+ $("btnLogin").classList.toggle("oculto",!!usuario);
+ $("btnSalir").classList.toggle("oculto",!usuario);
+ $("usuario").disabled=!!usuario;
+ $("contrasena").disabled=!!usuario;
+ if(autorizado)$("estadoLogin").textContent="Sesión iniciada. Ya puedes publicar.";
+ else if(usuario){$("estadoLogin").textContent="La cuenta no está autorizada para publicar.";signOut(auth);}
+ else $("estadoLogin").textContent="Inicia sesión con la cuenta autorizada del profesor.";
+}
+onAuthStateChanged(auth,actualizarSesion,error=>{
+ $("estadoLogin").textContent="No se pudo comprobar la sesión de Firebase: "+error.message;
+});
+
+$("formLogin").addEventListener("submit",async e=>{
+ e.preventDefault();
+ $("btnLogin").disabled=true;
+ $("estadoLogin").textContent="Verificando acceso...";
+ try{
+  const usuario=$("usuario").value.trim();
+  if(usuario.toLowerCase()!=="admin"&&usuario.toLowerCase()!==CORREO_PROFESOR.toLowerCase())throw new Error("Escribe admin o el correo matematicapostel@gmail.com.");
+  await signInWithEmailAndPassword(auth,CORREO_PROFESOR,$("contrasena").value);
+ }catch(err){$("estadoLogin").textContent=mensajeFirebase(err);}
+ finally{$("btnLogin").disabled=false;}
+});
+$("btnSalir").addEventListener("click",async()=>{
+ try{await signOut(auth);$("estadoLogin").textContent="Sesión cerrada.";}
+ catch(err){$("estadoLogin").textContent=mensajeFirebase(err);}
+});
+
+function mensajeFirebase(err){
+ const mensajes={
+  "auth/invalid-credential":"Correo o contraseña incorrectos. Comprueba que la cuenta exista en Authentication.",
+  "auth/user-not-found":"No existe una cuenta con ese correo. Créala en Firebase Authentication.",
+  "auth/wrong-password":"La contraseña es incorrecta.",
+  "auth/invalid-email":"El formato del correo no es válido.",
+  "auth/operation-not-allowed":"Activa el método Correo electrónico/Contraseña en Firebase Authentication.",
+  "auth/unauthorized-domain":"Agrega el dominio de esta página en Authentication > Settings > Authorized domains.",
+  "permission-denied":"Firebase rechazó la operación. Revisa las reglas de Firestore."
+ };
+ return mensajes[err.code]||("Error: "+(err.message||"No se pudo completar la operación."));
+}
+
+function nombreTema(id){
+ const opciones=[...$("temaId").options];
+ return opciones.find(o=>o.value===id)?.textContent||id||"Ninguno";
+}
+function crearTarjeta(m, permitirEliminar=false){
+ const card=document.createElement("article");card.className="publicacion";
+ for(const texto of [m.tipo||"Material",m.trimestre||"Sin trimestre",nombreTema(m.temaId)]){
+  const et=document.createElement("span");et.className="etiqueta";et.textContent=texto;card.append(et);
+ }
+ const h=document.createElement("h3");h.textContent=m.titulo||"Sin título";
+ const desc=document.createElement("p");desc.textContent=m.descripcion||"";
+ card.append(h,desc);
+ if(m.fechaEntrega){const fecha=document.createElement("p");fecha.className="texto-ayuda";fecha.textContent="Fecha de entrega: "+m.fechaEntrega;card.append(fecha);}
+ if(m.enlace){const a=document.createElement("a");a.className="boton";a.href=m.enlace;a.target="_blank";a.rel="noopener noreferrer";a.textContent="ABRIR DOCUMENTO DE DRIVE ";card.append(a);}
+ if(permitirEliminar){
+  const btn=document.createElement("button");btn.type="button";btn.className="boton-eliminar";btn.textContent="ELIMINAR MATERIAL";
+  btn.addEventListener("click",async()=>{
+   if(!confirm('¿Seguro que deseas eliminar "'+(m.titulo||"este material")+'"? Esta acción no se puede deshacer.'))return;
+   btn.disabled=true;btn.textContent="ELIMINANDO...";
+   try{await deleteDoc(doc(db,"publicaciones",m.id));eliminadosLocalmente.add(m.id);materiales=materiales.filter(item=>item.id!==m.id);dibujarMateriales();$("estadoBusqueda").textContent="Material eliminado correctamente.";}
+   catch(err){$("estadoBusqueda").textContent="No se pudo eliminar. "+mensajeFirebase(err);btn.disabled=false;btn.textContent="ELIMINAR MATERIAL";}
+  });
+  card.append(btn);
+ }
+ return card;
+}
+function dibujarMateriales(){
+ const lista=$("listaMaterial");
+ const listaBusqueda=$("listaBusqueda");
+ lista.replaceChildren();listaBusqueda.replaceChildren();
+ const tipo=$("filtroTipo").value,trimestre=$("filtroTrimestre").value,tema=$("filtroTema").value;
+ const filtrados=materiales.filter(m=>(!tipo||m.tipo===tipo)&&(!trimestre||m.trimestre===trimestre)&&(!tema||m.temaId===tema));
+ if(!filtrados.length){
+  $("estadoMaterial").textContent=materiales.length?"No hay materiales que coincidan con los filtros.":"Todavía no hay materiales publicados.";
+  $("estadoBusqueda").textContent=$("panelProfesor").classList.contains("oculto")?"":"No hay materiales que coincidan con los filtros.";
+  return;
+ }
+ $("estadoMaterial").textContent="Materiales encontrados: "+filtrados.length;
+ $("estadoBusqueda").textContent="Resultados encontrados: "+filtrados.length;
+ filtrados.forEach(m=>{
+  lista.append(crearTarjeta(m,false));
+  listaBusqueda.append(crearTarjeta(m,true));
+ });
+}
+["filtroTipo","filtroTrimestre","filtroTema"].forEach(id=>$(id).addEventListener("change",dibujarMateriales));
+
+onSnapshot(query(collection(db,"publicaciones"),orderBy("creado","desc")),snap=>{
+ materiales=snap.docs.filter(d=>!eliminadosLocalmente.has(d.id)).map(d=>({id:d.id,...d.data()}));
+ dibujarMateriales();
+},err=>{
+ $("estadoMaterial").textContent="No se pudieron cargar los materiales. "+mensajeFirebase(err);
+});
+
+$("formPublicar").addEventListener("submit",async e=>{
+ e.preventDefault();
+ const usuario=auth.currentUser;
+ if(!usuario||usuario.email?.toLowerCase()!==CORREO_PROFESOR.toLowerCase()){
+  $("estadoPublicar").textContent="Inicia sesión con la cuenta autorizada del profesor.";
+  return;
+ }
+ const enlace=$("enlace").value.trim();
+ if(!enlace){$("estadoPublicar").textContent="Pega el enlace de Google Drive del documento.";return;}
+ try{const u=new URL(enlace);if(!["https:","http:"].includes(u.protocol))throw new Error();}catch{$("estadoPublicar").textContent="El enlace no es válido.";return;}
+ $("btnPublicar").disabled=true;
+ $("estadoPublicar").textContent="Publicando enlace de Google Drive...";
+ try{
+  await addDoc(collection(db,"publicaciones"),{
+   tipo:$("tipo").value,trimestre:$("trimestre").value,temaId:$("temaId").value,
+   titulo:$("titulo").value.trim(),descripcion:$("descripcion").value.trim(),
+   enlace,fechaEntrega:$("fecha").value||"",
+   autor:usuario.email,creado:serverTimestamp()
+  });
+  $("formPublicar").reset();
+  $("estadoPublicar").textContent="Material publicado correctamente.";
+ }catch(err){
+  $("estadoPublicar").textContent="No se pudo publicar. "+mensajeFirebase(err);
+ }
+ finally{$("btnPublicar").disabled=false;}
+});
+
+const canvas=$("fondo"),ctx=canvas.getContext("2d"),simbolos=["+","−","×","÷","=","π","√","∞","∑"];
+let particulas=[];
+function ajustarCanvas(){canvas.width=innerWidth;canvas.height=innerHeight;}
+class Particula{
+ constructor(){this.x=Math.random()*canvas.width;this.y=Math.random()*canvas.height;this.t=Math.random()*20+12;this.v=Math.random()*.6+.2;this.s=simbolos[Math.floor(Math.random()*simbolos.length)];this.o=Math.random()*.5+.15;}
+ mover(){this.y+=this.v;if(this.y>canvas.height+20){this.y=-20;this.x=Math.random()*canvas.width;}}
+ dibujar(){ctx.fillStyle="rgba(210,230,255,"+this.o+")";ctx.font=this.t+"px Arial";ctx.fillText(this.s,this.x,this.y);}
+}
+function iniciar(){particulas=Array.from({length:55},()=>new Particula());}
+function animar(){ctx.clearRect(0,0,canvas.width,canvas.height);particulas.forEach(p=>{p.mover();p.dibujar();});requestAnimationFrame(animar);}
+ajustarCanvas();iniciar();animar();addEventListener("resize",()=>{ajustarCanvas();iniciar();});
+</script>
+</body>
+</html>

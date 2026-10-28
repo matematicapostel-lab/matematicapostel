@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Desigualdades e Inecuaciones</title>
+
+<style>
+
+
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#000814;
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+
+#fondo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+
+
+.encabezado{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 20px;
+}
+
+.encabezado h1{
+    font-size:45px;
+    margin-bottom:10px;
+    color:white;
+
+    text-shadow:
+        0 0 5px #008cff,
+        0 0 10px #008cff,
+        0 0 20px #0066ff,
+        3px 3px 0 #001f4d;
+}
+
+.encabezado p{
+    font-size:19px;
+    color:#d9ecff;
+}
+
+
+
+.contenido{
+    position:relative;
+    z-index:2;
+    width:85%;
+    max-width:1000px;
+    margin:auto;
+}
+
+
+
+.caja{
+    background:linear-gradient(145deg,#0d47a1,#06265c);
+    color:white;
+    padding:30px;
+    margin:30px 0;
+
+    border:6px solid #000;
+    border-radius:20px;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 15px #008cff,
+        0 0 30px rgba(0,140,255,0.6);
+}
+
+
+
+.caja h2{
+    color:white;
+    font-size:30px;
+
+    border-bottom:3px solid #66c7ff;
+    padding-bottom:10px;
+
+    text-shadow:
+        0 0 8px #00aaff,
+        2px 2px 0 #001b44;
+}
+
+.caja h3{
+    color:#9bdcff;
+    font-size:23px;
+
+    text-shadow:
+        0 0 6px #008cff;
+}
+
+
+
+.definicion{
+    background:linear-gradient(145deg,#1b6fc9,#08366f);
+    border:4px solid #000;
+
+    padding:20px;
+    border-radius:12px;
+
+    font-size:18px;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.formula{
+    background:linear-gradient(145deg,#123f83,#061d46);
+
+    padding:20px;
+
+    text-align:center;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    font-size:25px;
+    font-weight:bold;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 15px #008cff;
+
+    color:white;
+}
+
+
+
+.ejemplo{
+    background:linear-gradient(145deg,#164d91,#092a5b);
+
+    padding:20px;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px rgba(0,140,255,0.7);
+}
+
+
+
+.paso{
+    background:linear-gradient(145deg,#0b376f,#061d40);
+
+    border-left:6px solid #00aaff;
+
+    padding:15px;
+    margin:12px 0;
+
+    border-radius:8px;
+
+    box-shadow:
+        3px 3px 0 #000,
+        0 0 8px rgba(0,170,255,0.5);
+}
+
+
+
+.resultado{
+    background:linear-gradient(145deg,#075c78,#06354d);
+
+    border-left:7px solid #00e5ff;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:
+        4px 4px 0 #000,
+        0 0 15px #00cfff;
+
+    color:white;
+}
+
+
+
+.regla{
+    background:linear-gradient(145deg,#123f83,#082957);
+
+    padding:20px;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.indicacion{
+    background:linear-gradient(145deg,#174f91,#092d60);
+
+    border-left:7px solid #00c8ff;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    margin:20px 0;
+
+    box-shadow:
+        4px 4px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.ejercicio{
+    background:linear-gradient(145deg,#123f83,#072750);
+
+    padding:20px;
+
+    border:5px solid #000;
+    border-radius:15px;
+
+    margin:25px 0;
+
+    box-shadow:
+        6px 6px 0 #000,
+        0 0 15px rgba(0,140,255,0.7);
+}
+
+.ejercicio h3{
+    margin-top:0;
+    color:#8fd8ff;
+}
+
+
+
+.botones{
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+    margin:50px 0;
+}
+
+.boton{
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:linear-gradient(145deg,#1677d2,#063b86);
+
+    color:white;
+
+    padding:15px 30px;
+
+    margin:10px;
+
+    border:5px solid #000;
+    border-radius:12px;
+
+    font-size:18px;
+    font-weight:bold;
+
+    text-shadow:
+        0 0 5px #008cff,
+        2px 2px 0 #001b44;
+
+    box-shadow:
+        6px 6px 0 #000,
+        0 0 12px #008cff;
+
+    transition:0.3s;
+}
+
+
+
+.boton:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    background:linear-gradient(145deg,#2692ed,#0752a8);
+
+    box-shadow:
+        8px 8px 0 #000,
+        0 0 20px #00aaff,
+        0 0 35px rgba(0,140,255,0.8);
+}
+
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+    border-left:2px solid #003b73;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#168cff,#063b86);
+
+    border:3px solid #000;
+    border-radius:10px;
+
+    box-shadow:0 0 10px #008cff;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(#38a6ff,#0752a8);
+}
+
+
+
+@media(max-width:700px){
+
+    .encabezado h1{
+        font-size:32px;
+    }
+
+    .encabezado p{
+        font-size:16px;
+    }
+
+    .contenido{
+        width:92%;
+    }
+
+    .caja{
+        padding:20px;
+    }
+
+    .caja h2{
+        font-size:24px;
+    }
+
+    .formula{
+        font-size:20px;
+        overflow-x:auto;
+    }
+
+    .boton{
+        display:block;
+        margin:15px auto;
+        width:80%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<canvas id="fondo"></canvas>
+
+
+
+
+<div class="encabezado">
+
+<h1>Desigualdades e Inecuaciones</h1>
+
+<p>tema2-2do trimestre</p>
+
+</div>
+
+
+<div class="contenido">
+
+
+
+
+<div class="caja">
+
+<h2>1. Introducción</h2>
+
+<p>
+Las desigualdades e inecuaciones son expresiones matemáticas que permiten
+comparar dos cantidades y determinar los valores que puede tomar una
+variable.
+</p>
+
+<p>
+A diferencia de una ecuación, que busca normalmente un valor específico,
+una inecuación puede tener muchos valores como solución.
+</p>
+
+<div class="definicion">
+
+<strong>Ejemplo:</strong>
+
+<p>
+x + 3 > 7
+</p>
+
+<p>
+En este caso buscamos todos los valores de <strong>x</strong> que hacen
+verdadera la desigualdad.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>2. Signos de desigualdad</h2>
+
+<p>Los principales signos utilizados son:</p>
+
+<div class="regla">
+
+<p><strong>&gt;</strong> significa "mayor que".</p>
+
+<p><strong>&lt;</strong> significa "menor que".</p>
+
+<p><strong>≥</strong> significa "mayor o igual que".</p>
+
+<p><strong>≤</strong> significa "menor o igual que".</p>
+
+</div>
+
+<div class="ejemplo">
+
+<h3>Ejemplos</h3>
+
+<p>8 &gt; 5 → 8 es mayor que 5.</p>
+
+<p>3 &lt; 9 → 3 es menor que 9.</p>
+
+<p>7 ≥ 7 → 7 es mayor o igual que 7.</p>
+
+<p>4 ≤ 6 → 4 es menor o igual que 6.</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>3. Diferencia entre ecuación e inecuación</h2>
+
+<p>
+Una <strong>ecuación</strong> utiliza el signo igual:
+</p>
+
+<div class="formula">
+
+x + 5 = 10
+
+</div>
+
+<p>
+Una <strong>inecuación</strong> utiliza signos de desigualdad:
+</p>
+
+<div class="formula">
+
+x + 5 > 10
+
+</div>
+
+<div class="indicacion">
+
+<strong>Importante:</strong>
+
+<p>
+Una ecuación puede tener una solución específica, mientras que una
+inecuación normalmente representa un conjunto de valores que cumplen
+la condición.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>4. Propiedades de las desigualdades</h2>
+
+<h3>4.1 Sumar o restar un número</h3>
+
+<p>
+Podemos sumar o restar la misma cantidad en ambos lados sin cambiar
+el sentido de la desigualdad.
+</p>
+
+<div class="ejemplo">
+
+<p>
+x + 4 &gt; 9
+</p>
+
+<p>
+Restamos 4 en ambos lados:
+</p>
+
+<p>
+x + 4 - 4 &gt; 9 - 4
+</p>
+
+<div class="resultado">
+
+x &gt; 5
+
+</div>
+
+</div>
+
+
+<h3>4.2 Multiplicar o dividir por un número positivo</h3>
+
+<p>
+Si multiplicamos o dividimos por un número positivo, el signo permanece
+igual.
+</p>
+
+<div class="ejemplo">
+
+<p>
+2x &gt; 10
+</p>
+
+<p>
+Dividimos entre 2:
+</p>
+
+<div class="resultado">
+
+x &gt; 5
+
+</div>
+
+</div>
+
+
+<h3>4.3 Multiplicar o dividir por un número negativo</h3>
+
+<p>
+Esta es una de las reglas más importantes.
+</p>
+
+<div class="indicacion">
+
+<strong>Regla importante:</strong>
+
+<p>
+Cuando multiplicamos o dividimos una desigualdad por un número negativo,
+<strong>el signo debe cambiar de sentido.</strong>
+</p>
+
+<p>
+&gt; cambia a &lt;
+</p>
+
+<p>
+&lt; cambia a &gt;
+</p>
+
+<p>
+≥ cambia a ≤
+</p>
+
+<p>
+≤ cambia a ≥
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>5. Inecuaciones de primer grado</h2>
+
+<p>
+Una inecuación de primer grado contiene una variable elevada a la
+potencia 1.
+</p>
+
+<div class="formula">
+
+ax + b &gt; c
+
+</div>
+
+<p>
+Para resolverla debemos despejar la variable siguiendo las propiedades
+de las desigualdades.
+</p>
+
+<div class="ejemplo">
+
+<h3>Ejemplo básico</h3>
+
+<p>
+x + 6 &gt; 14
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Restamos 6 en ambos lados.
+
+<p>
+x + 6 - 6 &gt; 14 - 6
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong>
+
+<p>
+x &gt; 8
+</p>
+
+</div>
+
+<div class="resultado">
+
+Respuesta: x &gt; 8
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>6. Inecuaciones con números negativos</h2>
+
+<p>
+Cuando aparece un número negativo multiplicando o dividiendo a la
+variable, debemos recordar cambiar el signo.
+</p>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+-3x &gt; 12
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Dividimos entre -3.
+
+<p>
+x &gt; 12 / -3
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Como dividimos entre un número negativo,
+cambiamos el signo.
+
+<p>
+x &lt; -4
+</p>
+
+</div>
+
+<div class="resultado">
+
+Respuesta: x &lt; -4
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>7. Representación mediante intervalos</h2>
+
+<p>
+Las soluciones de una inecuación también pueden escribirse utilizando
+intervalos.
+</p>
+
+<div class="regla">
+
+<p>
+<strong>x &gt; 3</strong> → (3, ∞)
+</p>
+
+<p>
+<strong>x ≥ 3</strong> → [3, ∞)
+</p>
+
+<p>
+<strong>x &lt; 3</strong> → (-∞, 3)
+</p>
+
+<p>
+<strong>x ≤ 3</strong> → (-∞, 3]
+</p>
+
+</div>
+
+<div class="indicacion">
+
+<p>
+El paréntesis significa que el número no está incluido.
+</p>
+
+<p>
+El corchete significa que el número sí está incluido.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>8. Ejercicios de mayor dificultad</h2>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1: Inecuación con varios términos</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+3x + 7 &gt; 2x + 15
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Restamos 2x en ambos lados.
+
+<p>
+3x - 2x + 7 &gt; 15
+</p>
+
+<p>
+x + 7 &gt; 15
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Restamos 7.
+
+<p>
+x &gt; 15 - 7
+</p>
+
+</div>
+
+<div class="resultado">
+
+x &gt; 8
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2: Con paréntesis</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+4(x - 3) ≤ 2x + 10
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Aplicamos la propiedad distributiva.
+
+<p>
+4x - 12 ≤ 2x + 10
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Restamos 2x.
+
+<p>
+4x - 2x - 12 ≤ 10
+</p>
+
+<p>
+2x - 12 ≤ 10
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Sumamos 12.
+
+<p>
+2x ≤ 22
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong> Dividimos entre 2.
+
+<p>
+x ≤ 11
+</p>
+
+</div>
+
+<div class="resultado">
+
+x ≤ 11
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3: Con número negativo</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+-5x + 8 ≥ 23
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Restamos 8.
+
+<p>
+-5x ≥ 15
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Dividimos entre -5.
+
+<p>
+x ≥ 15 / -5
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Como dividimos entre un número negativo,
+cambiamos el signo.
+
+<p>
+x ≤ -3
+</p>
+
+</div>
+
+<div class="resultado">
+
+x ≤ -3
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4: Con paréntesis en ambos lados</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+3(2x - 4) &gt; 2(x + 5)
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Aplicamos la propiedad distributiva.
+
+<p>
+6x - 12 &gt; 2x + 10
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Restamos 2x.
+
+<p>
+4x - 12 &gt; 10
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Sumamos 12.
+
+<p>
+4x &gt; 22
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong> Dividimos entre 4.
+
+<p>
+x &gt; 22/4
+</p>
+
+<p>
+x &gt; 11/2
+</p>
+
+</div>
+
+<div class="resultado">
+
+x &gt; 11/2
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5: Con fracciones</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+x/3 + 2 &lt; 7
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Restamos 2.
+
+<p>
+x/3 &lt; 5
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Multiplicamos ambos lados por 3.
+
+<p>
+x &lt; 15
+</p>
+
+</div>
+
+<div class="resultado">
+
+x &lt; 15
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6: Inecuación con fracciones y paréntesis</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+(x - 2)/3 + (x + 1)/2 ≥ 5
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Buscamos el mínimo común múltiplo de 3 y 2.
+
+<p>
+MCM(3,2) = 6
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Multiplicamos toda la desigualdad por 6.
+
+<p>
+6[(x - 2)/3] + 6[(x + 1)/2] ≥ 6(5)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Simplificamos.
+
+<p>
+2(x - 2) + 3(x + 1) ≥ 30
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong> Aplicamos la distributiva.
+
+<p>
+2x - 4 + 3x + 3 ≥ 30
+</p>
+
+<p>
+5x - 1 ≥ 30
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 5:</strong> Sumamos 1.
+
+<p>
+5x ≥ 31
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 6:</strong> Dividimos entre 5.
+
+<p>
+x ≥ 31/5
+</p>
+
+</div>
+
+<div class="resultado">
+
+x ≥ 31/5
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 7: Doble desigualdad</h3>
+
+<p>
+Resolver:
+</p>
+
+<div class="formula">
+
+2 &lt; 3x + 2 ≤ 14
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Restamos 2 en las tres partes.
+
+<p>
+2 - 2 &lt; 3x + 2 - 2 ≤ 14 - 2
+</p>
+
+<p>
+0 &lt; 3x ≤ 12
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Dividimos todo entre 3.
+
+<p>
+0 &lt; x ≤ 4
+</p>
+
+</div>
+
+<div class="resultado">
+
+0 &lt; x ≤ 4
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 8: Problema aplicado</h3>
+
+<p>
+Un estudiante tiene Bs 120 y quiere comprar varios cuadernos que cuestan
+Bs 18 cada uno. Además, debe guardar Bs 12 para otro gasto.
+¿Cuántos cuadernos como máximo puede comprar?
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Representamos la cantidad de cuadernos con x.
+
+<p>
+Cada cuaderno cuesta Bs 18.
+</p>
+
+<p>
+Debe guardar Bs 12.
+</p>
+
+<p>
+Por lo tanto:
+</p>
+
+<p>
+18x + 12 ≤ 120
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Restamos 12.
+
+<p>
+18x ≤ 108
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Dividimos entre 18.
+
+<p>
+x ≤ 6
+</p>
+
+</div>
+
+<div class="resultado">
+
+Puede comprar como máximo 6 cuadernos.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>9. Verificación de una inecuación</h2>
+
+<p>
+Para comprobar una solución podemos elegir un valor que pertenezca
+al conjunto solución y sustituirlo en la inecuación original.
+</p>
+
+<div class="ejemplo">
+
+<p>
+Tenemos:
+</p>
+
+<div class="formula">
+
+x &gt; 8
+
+</div>
+
+<p>
+Elegimos x = 10.
+</p>
+
+<p>
+Sustituimos:
+</p>
+
+<p>
+10 &gt; 8
+</p>
+
+<div class="resultado">
+
+La desigualdad es verdadera, por lo tanto 10 pertenece a la solución.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>10. Indicaciones importantes</h2>
+
+<div class="indicacion">
+
+<p>
+<strong>1.</strong> Identifica primero el signo de desigualdad.
+</p>
+
+<p>
+<strong>2.</strong> Puedes sumar o restar la misma cantidad en ambos lados.
+</p>
+
+<p>
+<strong>3.</strong> Puedes multiplicar o dividir por un número positivo
+sin cambiar el signo.
+</p>
+
+<p>
+<strong>4.</strong> Si multiplicas o divides por un número negativo,
+debes cambiar el sentido del signo.
+</p>
+
+<p>
+<strong>5.</strong> Si existen paréntesis, aplica primero la propiedad
+distributiva.
+</p>
+
+<p>
+<strong>6.</strong> Si existen fracciones, busca un denominador común
+o multiplica por el mínimo común múltiplo.
+</p>
+
+<p>
+<strong>7.</strong> Siempre es recomendable verificar el resultado.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>11. Resumen</h2>
+
+<p>
+Las desigualdades permiten comparar cantidades utilizando signos como
+<strong>&gt;, &lt;, ≥ y ≤</strong>.
+</p>
+
+<p>
+Las inecuaciones son expresiones matemáticas en las que debemos encontrar
+los valores de una variable que hacen verdadera una desigualdad.
+</p>
+
+<div class="formula">
+
+Si multiplicamos o dividimos por un número negativo,
+el signo cambia de sentido.
+
+</div>
+
+<p>
+Resolver correctamente una inecuación requiere aplicar las propiedades
+de las desigualdades, simplificar la expresión y expresar claramente
+el conjunto de soluciones.
+</p>
+
+</div>
+
+
+
+
+
+
+<div class="botones">
+
+    <a href="1yo.html" class="boton">
+        Volver a Temas
+    </a>
+
+    <a href="index.html" class="boton">
+        Volver al Inicio
+    </a>
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+const canvas = document.getElementById("fondo");
+const ctx = canvas.getContext("2d");
+
+let estrellas = [];
+let simbolos = [];
+
+function ajustarCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+ajustarCanvas();
+
+window.addEventListener("resize", ajustarCanvas);
+
+
+
+
+for(let i = 0; i < 150; i++){
+
+    estrellas.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        radio:Math.random() * 2,
+
+        brillo:Math.random()
+
+    });
+
+}
+
+
+
+
+const signos = [
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+];
+
+for(let i = 0; i < 80; i++){
+
+    simbolos.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        velocidad:Math.random() * 1.5 + 0.3,
+
+        signo:signos[Math.floor(Math.random() * signos.length)],
+
+        tamaño:Math.random() * 20 + 12,
+
+        opacidad:Math.random() * 0.5 + 0.2
+
+    });
+
+}
+
+
+
+
+function animar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    
+
+    estrellas.forEach(estrella => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            estrella.x,
+            estrella.y,
+            estrella.radio,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "rgba(255,255,255," +
+            estrella.brillo +
+            ")";
+
+        ctx.fill();
+
+    });
+
+
+    
+
+    simbolos.forEach(simbolo => {
+
+        ctx.font =
+            simbolo.tamaño +
+            "px Arial";
+
+        ctx.fillStyle =
+            "rgba(0,170,255," +
+            simbolo.opacidad +
+            ")";
+
+        ctx.fillText(
+            simbolo.signo,
+            simbolo.x,
+            simbolo.y
+        );
+
+
+        simbolo.y += simbolo.velocidad;
+
+
+        if(simbolo.y > canvas.height + 30){
+
+            simbolo.y = -30;
+
+            simbolo.x =
+                Math.random() * canvas.width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animar);
+
+}
+
+animar();
+
+</script>
+
+
+</body>
+
+</html>

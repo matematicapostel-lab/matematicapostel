@@ -1,0 +1,1877 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Progresiones Aritméticas y Geométricas</title>
+
+<style>
+
+
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#000814;
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+
+#fondo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    pointer-events:none;
+}
+
+
+
+.encabezado{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 20px;
+}
+
+.encabezado h1{
+    font-size:45px;
+    margin-bottom:10px;
+    color:white;
+
+    text-shadow:
+        0 0 5px #008cff,
+        0 0 10px #008cff,
+        0 0 20px #0066ff,
+        3px 3px 0 #001f4d;
+}
+
+.encabezado p{
+    font-size:19px;
+    color:#d9ecff;
+}
+
+
+
+.contenido{
+    position:relative;
+    z-index:2;
+    width:85%;
+    max-width:1000px;
+    margin:auto;
+}
+
+
+
+.caja{
+    background:linear-gradient(145deg,#0d47a1,#06265c);
+    color:white;
+    padding:30px;
+    margin:30px 0;
+
+    border:6px solid #000;
+    border-radius:20px;
+
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 15px #008cff,
+        0 0 30px rgba(0,140,255,0.6);
+}
+
+
+
+.caja h2{
+    color:white;
+    font-size:30px;
+
+    border-bottom:3px solid #66c7ff;
+    padding-bottom:10px;
+
+    text-shadow:
+        0 0 8px #00aaff,
+        2px 2px 0 #001b44;
+}
+
+.caja h3{
+    color:#9bdcff;
+    font-size:23px;
+
+    text-shadow:
+        0 0 6px #008cff;
+}
+
+
+
+.definicion{
+    background:linear-gradient(145deg,#1b6fc9,#08366f);
+
+    border:4px solid #000;
+
+    padding:20px;
+    border-radius:12px;
+
+    font-size:18px;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.formula{
+    background:linear-gradient(145deg,#123f83,#061d46);
+
+    padding:20px;
+
+    text-align:center;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    font-size:24px;
+    font-weight:bold;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 15px #008cff;
+
+    color:white;
+}
+
+
+
+.ejemplo{
+    background:linear-gradient(145deg,#164d91,#092a5b);
+
+    padding:20px;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px rgba(0,140,255,0.7);
+}
+
+
+
+.paso{
+    background:linear-gradient(145deg,#0b376f,#061d40);
+
+    border-left:6px solid #00aaff;
+
+    padding:15px;
+    margin:12px 0;
+
+    border-radius:8px;
+
+    box-shadow:
+        3px 3px 0 #000,
+        0 0 8px rgba(0,170,255,0.5);
+}
+
+
+
+.resultado{
+    background:linear-gradient(145deg,#075c78,#06354d);
+
+    border-left:7px solid #00e5ff;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    font-size:20px;
+    font-weight:bold;
+
+    box-shadow:
+        4px 4px 0 #000,
+        0 0 15px #00cfff;
+
+    color:white;
+}
+
+
+
+.regla{
+    background:linear-gradient(145deg,#123f83,#082957);
+
+    padding:20px;
+
+    border:4px solid #000;
+    border-radius:12px;
+
+    margin:20px 0;
+
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.indicacion{
+    background:linear-gradient(145deg,#174f91,#092d60);
+
+    border-left:7px solid #00c8ff;
+
+    padding:20px;
+
+    border-radius:10px;
+
+    margin:20px 0;
+
+    box-shadow:
+        4px 4px 0 #000,
+        0 0 12px #008cff;
+}
+
+
+
+.ejercicio{
+    background:linear-gradient(145deg,#123f83,#072750);
+
+    padding:20px;
+
+    border:5px solid #000;
+    border-radius:15px;
+
+    margin:25px 0;
+
+    box-shadow:
+        6px 6px 0 #000,
+        0 0 15px rgba(0,140,255,0.7);
+}
+
+.ejercicio h3{
+    margin-top:0;
+    color:#8fd8ff;
+}
+
+
+
+.botones{
+    position:relative;
+    z-index:2;
+
+    text-align:center;
+    margin:50px 0;
+}
+
+.boton{
+    display:inline-block;
+
+    text-decoration:none;
+
+    background:linear-gradient(145deg,#1677d2,#063b86);
+
+    color:white;
+
+    padding:15px 30px;
+
+    margin:10px;
+
+    border:5px solid #000;
+    border-radius:12px;
+
+    font-size:18px;
+    font-weight:bold;
+
+    text-shadow:
+        0 0 5px #008cff,
+        2px 2px 0 #001b44;
+
+    box-shadow:
+        6px 6px 0 #000,
+        0 0 12px #008cff;
+
+    transition:0.3s;
+}
+
+.boton:hover{
+    transform:translateY(-5px) scale(1.05);
+
+    background:linear-gradient(145deg,#2692ed,#0752a8);
+
+    box-shadow:
+        8px 8px 0 #000,
+        0 0 20px #00aaff,
+        0 0 35px rgba(0,140,255,0.8);
+}
+
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+    border-left:2px solid #003b73;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#168cff,#063b86);
+
+    border:3px solid #000;
+    border-radius:10px;
+
+    box-shadow:0 0 10px #008cff;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:linear-gradient(#38a6ff,#0752a8);
+}
+
+
+
+@media(max-width:700px){
+
+    .encabezado h1{
+        font-size:32px;
+    }
+
+    .encabezado p{
+        font-size:16px;
+    }
+
+    .contenido{
+        width:92%;
+    }
+
+    .caja{
+        padding:20px;
+    }
+
+    .caja h2{
+        font-size:24px;
+    }
+
+    .formula{
+        font-size:20px;
+        overflow-x:auto;
+    }
+
+    .boton{
+        display:block;
+        margin:15px auto;
+        width:80%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<canvas id="fondo"></canvas>
+
+
+
+
+<div class="encabezado">
+
+<h1>Progresiones Aritméticas y Geométricas</h1>
+
+<p> tema1-3cer trimestre</p>
+
+</div>
+
+
+<div class="contenido">
+
+
+
+
+<div class="caja">
+
+<h2>1. Introducción</h2>
+
+<p>
+Las progresiones son sucesiones de números que siguen una determinada
+regla de formación.
+</p>
+
+<p>
+Son utilizadas para estudiar patrones numéricos, calcular cantidades,
+predecir valores y resolver diferentes problemas matemáticos.
+</p>
+
+<div class="definicion">
+
+<strong>Ejemplo:</strong>
+
+<p>
+2, 4, 6, 8, 10, ...
+</p>
+
+<p>
+En esta sucesión se suma siempre 2 para obtener el siguiente número.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>2. Sucesiones numéricas</h2>
+
+<p>
+Una sucesión es un conjunto ordenado de números que siguen una regla
+determinada.
+</p>
+
+<p>
+Cada número de la sucesión recibe el nombre de <strong>término</strong>.
+</p>
+
+<div class="formula">
+
+a₁, a₂, a₃, a₄, a₅, ...
+
+</div>
+
+<p>
+Donde:
+</p>
+
+<div class="regla">
+
+<p><strong>a₁</strong> = primer término.</p>
+
+<p><strong>a₂</strong> = segundo término.</p>
+
+<p><strong>a₃</strong> = tercer término.</p>
+
+<p><strong>aₙ</strong> = término en la posición n.</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>3. Progresión Aritmética</h2>
+
+<div class="definicion">
+
+<p>
+Una <strong>progresión aritmética (P.A.)</strong> es una sucesión en la
+que cada término se obtiene sumando o restando una cantidad constante
+llamada <strong>diferencia común</strong>.
+</p>
+
+</div>
+
+<div class="formula">
+
+aₙ = a₁ + (n - 1)d
+
+</div>
+
+<p>
+Donde:
+</p>
+
+<div class="regla">
+
+<p><strong>aₙ</strong> = término que queremos encontrar.</p>
+
+<p><strong>a₁</strong> = primer término.</p>
+
+<p><strong>n</strong> = posición del término.</p>
+
+<p><strong>d</strong> = diferencia común.</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>4. Diferencia común</h2>
+
+<p>
+La diferencia común se obtiene restando un término menos el término
+anterior.
+</p>
+
+<div class="formula">
+
+d = a₂ - a₁
+
+</div>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+5, 9, 13, 17, 21, ...
+</p>
+
+<p>
+Calculamos:
+</p>
+
+<p>
+9 - 5 = 4
+</p>
+
+<p>
+13 - 9 = 4
+</p>
+
+<p>
+17 - 13 = 4
+</p>
+
+<div class="resultado">
+
+La diferencia común es d = 4.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>5. Término general de una progresión aritmética</h2>
+
+<p>
+Para encontrar cualquier término de una progresión aritmética utilizamos:
+</p>
+
+<div class="formula">
+
+aₙ = a₁ + (n - 1)d
+
+</div>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+Encuentra el término número 20 de:
+</p>
+
+<p>
+3, 7, 11, 15, ...
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Identificamos los datos.
+
+<p>
+a₁ = 3
+</p>
+
+<p>
+d = 4
+</p>
+
+<p>
+n = 20
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Aplicamos la fórmula.
+
+<p>
+a₂₀ = 3 + (20 - 1)(4)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Resolvemos.
+
+<p>
+a₂₀ = 3 + 19(4)
+</p>
+
+<p>
+a₂₀ = 3 + 76
+</p>
+
+</div>
+
+<div class="resultado">
+
+a₂₀ = 79
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>6. Suma de los términos de una P.A.</h2>
+
+<p>
+Cuando necesitamos sumar varios términos de una progresión aritmética
+podemos utilizar:
+</p>
+
+<div class="formula">
+
+Sₙ = n(a₁ + aₙ) / 2
+
+</div>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+Calcula la suma de los primeros 20 términos:
+</p>
+
+<p>
+2, 5, 8, 11, ...
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Identificamos:
+
+<p>
+a₁ = 2
+</p>
+
+<p>
+d = 3
+</p>
+
+<p>
+n = 20
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Encontramos a₂₀.
+
+<p>
+a₂₀ = 2 + (20 - 1)(3)
+</p>
+
+<p>
+a₂₀ = 2 + 57
+</p>
+
+<p>
+a₂₀ = 59
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Aplicamos la fórmula de la suma.
+
+<p>
+S₂₀ = 20(2 + 59) / 2
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong>
+
+<p>
+S₂₀ = 20(61) / 2
+</p>
+
+<p>
+S₂₀ = 10(61)
+</p>
+
+</div>
+
+<div class="resultado">
+
+S₂₀ = 610
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>7. Progresión Geométrica</h2>
+
+<div class="definicion">
+
+<p>
+Una <strong>progresión geométrica (P.G.)</strong> es una sucesión en la
+que cada término se obtiene multiplicando el término anterior por una
+cantidad constante llamada <strong>razón</strong>.
+</p>
+
+</div>
+
+<div class="formula">
+
+aₙ = a₁ · rⁿ⁻¹
+
+</div>
+
+<p>
+Donde:
+</p>
+
+<div class="regla">
+
+<p><strong>aₙ</strong> = término que queremos encontrar.</p>
+
+<p><strong>a₁</strong> = primer término.</p>
+
+<p><strong>n</strong> = posición del término.</p>
+
+<p><strong>r</strong> = razón común.</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>8. Razón de una progresión geométrica</h2>
+
+<p>
+La razón se obtiene dividiendo un término entre el término anterior.
+</p>
+
+<div class="formula">
+
+r = a₂ / a₁
+
+</div>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+3, 6, 12, 24, 48, ...
+</p>
+
+<p>
+Calculamos:
+</p>
+
+<p>
+6 / 3 = 2
+</p>
+
+<p>
+12 / 6 = 2
+</p>
+
+<p>
+24 / 12 = 2
+</p>
+
+<div class="resultado">
+
+La razón es r = 2.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>9. Diferencia entre P.A. y P.G.</h2>
+
+<div class="regla">
+
+<h3>Progresión Aritmética</h3>
+
+<p>
+Se suma o resta siempre la misma cantidad.
+</p>
+
+<p>
+Ejemplo:
+</p>
+
+<p>
+4, 7, 10, 13, 16, ...
+</p>
+
+<p>
+d = 3
+</p>
+
+</div>
+
+<div class="regla">
+
+<h3>Progresión Geométrica</h3>
+
+<p>
+Se multiplica o divide siempre por la misma cantidad.
+</p>
+
+<p>
+Ejemplo:
+</p>
+
+<p>
+4, 8, 16, 32, 64, ...
+</p>
+
+<p>
+r = 2
+</p>
+
+</div>
+
+<div class="indicacion">
+
+<strong>Recuerda:</strong>
+
+<p>
+P.A. → se utiliza una <strong>diferencia</strong>.
+</p>
+
+<p>
+P.G. → se utiliza una <strong>razón</strong>.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>10. Suma de una progresión geométrica</h2>
+
+<p>
+Para sumar los primeros términos de una progresión geométrica utilizamos:
+</p>
+
+<div class="formula">
+
+Sₙ = a₁(rⁿ - 1) / (r - 1)
+
+</div>
+
+<p>
+Esta fórmula se utiliza cuando r ≠ 1.
+</p>
+
+<div class="ejemplo">
+
+<h3>Ejemplo</h3>
+
+<p>
+Calcula la suma:
+</p>
+
+<p>
+2 + 4 + 8 + 16 + 32
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 2
+</p>
+
+<p>
+r = 2
+</p>
+
+<p>
+n = 5
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Aplicamos la fórmula.
+
+<p>
+S₅ = 2(2⁵ - 1) / (2 - 1)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+2⁵ = 32
+</p>
+
+<p>
+S₅ = 2(32 - 1) / 1
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong>
+
+<p>
+S₅ = 2(31)
+</p>
+
+</div>
+
+<div class="resultado">
+
+S₅ = 62
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>11. Ejercicios de mayor dificultad</h2>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1: Encontrar un término lejano de una P.A.</h3>
+
+<p>
+Encuentra el término número 50 de:
+</p>
+
+<div class="formula">
+
+7, 12, 17, 22, ...
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong> Identificamos:
+
+<p>
+a₁ = 7
+</p>
+
+<p>
+d = 5
+</p>
+
+<p>
+n = 50
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Aplicamos:
+
+<p>
+aₙ = a₁ + (n - 1)d
+</p>
+
+<p>
+a₅₀ = 7 + (50 - 1)(5)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+a₅₀ = 7 + 49(5)
+</p>
+
+<p>
+a₅₀ = 7 + 245
+</p>
+
+</div>
+
+<div class="resultado">
+
+a₅₀ = 252
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2: Encontrar la diferencia</h3>
+
+<p>
+En una progresión aritmética, el primer término es 8 y el término
+número 15 es 78. Encuentra la diferencia común.
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 8
+</p>
+
+<p>
+a₁₅ = 78
+</p>
+
+<p>
+n = 15
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Utilizamos:
+
+<p>
+aₙ = a₁ + (n - 1)d
+</p>
+
+<p>
+78 = 8 + (15 - 1)d
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+78 = 8 + 14d
+</p>
+
+<p>
+70 = 14d
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong>
+
+<p>
+d = 70 / 14
+</p>
+
+</div>
+
+<div class="resultado">
+
+d = 5
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3: Suma de una P.A.</h3>
+
+<p>
+Calcula la suma de los primeros 30 términos de:
+</p>
+
+<div class="formula">
+
+5, 9, 13, 17, ...
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 5
+</p>
+
+<p>
+d = 4
+</p>
+
+<p>
+n = 30
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Encontramos el término 30.
+
+<p>
+a₃₀ = 5 + (30 - 1)(4)
+</p>
+
+<p>
+a₃₀ = 5 + 116
+</p>
+
+<p>
+a₃₀ = 121
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Aplicamos la suma.
+
+<p>
+S₃₀ = 30(5 + 121) / 2
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong>
+
+<p>
+S₃₀ = 30(126) / 2
+</p>
+
+<p>
+S₃₀ = 15(126)
+</p>
+
+</div>
+
+<div class="resultado">
+
+S₃₀ = 1890
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4: Término de una P.G.</h3>
+
+<p>
+Encuentra el término número 10 de:
+</p>
+
+<div class="formula">
+
+3, 6, 12, 24, ...
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 3
+</p>
+
+<p>
+r = 2
+</p>
+
+<p>
+n = 10
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Aplicamos:
+
+<p>
+aₙ = a₁ · rⁿ⁻¹
+</p>
+
+<p>
+a₁₀ = 3 · 2⁹
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+2⁹ = 512
+</p>
+
+<p>
+a₁₀ = 3 · 512
+</p>
+
+</div>
+
+<div class="resultado">
+
+a₁₀ = 1536
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5: Encontrar la razón</h3>
+
+<p>
+En una progresión geométrica, el primer término es 5 y el cuarto
+término es 135. Encuentra la razón positiva.
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 5
+</p>
+
+<p>
+a₄ = 135
+</p>
+
+<p>
+n = 4
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong>
+
+<p>
+aₙ = a₁ · rⁿ⁻¹
+</p>
+
+<p>
+135 = 5 · r³
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong> Dividimos entre 5.
+
+<p>
+27 = r³
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong> Sacamos raíz cúbica.
+
+<p>
+r = ∛27
+</p>
+
+</div>
+
+<div class="resultado">
+
+r = 3
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6: Suma de una P.G.</h3>
+
+<p>
+Calcula la suma de los primeros 8 términos de:
+</p>
+
+<div class="formula">
+
+4, 12, 36, 108, ...
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 4
+</p>
+
+<p>
+r = 3
+</p>
+
+<p>
+n = 8
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong> Aplicamos:
+
+<p>
+Sₙ = a₁(rⁿ - 1) / (r - 1)
+</p>
+
+<p>
+S₈ = 4(3⁸ - 1) / (3 - 1)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+3⁸ = 6561
+</p>
+
+<p>
+S₈ = 4(6561 - 1) / 2
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 4:</strong>
+
+<p>
+S₈ = 4(6560) / 2
+</p>
+
+<p>
+S₈ = 2(6560)
+</p>
+
+</div>
+
+<div class="resultado">
+
+S₈ = 13120
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 7: Problema aplicado a una P.A.</h3>
+
+<p>
+Una persona ahorra Bs 20 durante la primera semana y aumenta su ahorro
+en Bs 10 cada semana. ¿Cuánto ahorrará durante la semana número 12?
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 20
+</p>
+
+<p>
+d = 10
+</p>
+
+<p>
+n = 12
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong>
+
+<p>
+a₁₂ = 20 + (12 - 1)(10)
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+a₁₂ = 20 + 110
+</p>
+
+</div>
+
+<div class="resultado">
+
+En la semana 12 ahorrará Bs 130.
+
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 8: Problema aplicado a una P.G.</h3>
+
+<p>
+Una cantidad de bacterias se duplica cada hora. Si inicialmente existen
+250 bacterias, ¿cuántas habrá después de 6 horas?
+</p>
+
+<div class="paso">
+
+<strong>Paso 1:</strong>
+
+<p>
+a₁ = 250
+</p>
+
+<p>
+r = 2
+</p>
+
+<p>
+Después de 6 horas:
+</p>
+
+<p>
+n = 7
+</p>
+
+<p>
+porque el valor inicial corresponde al momento 0.
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 2:</strong>
+
+<p>
+a₇ = 250 · 2⁶
+</p>
+
+</div>
+
+<div class="paso">
+
+<strong>Paso 3:</strong>
+
+<p>
+2⁶ = 64
+</p>
+
+<p>
+a₇ = 250 · 64
+</p>
+
+</div>
+
+<div class="resultado">
+
+Después de 6 horas habrá 16 000 bacterias.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>12. Indicaciones importantes</h2>
+
+<div class="indicacion">
+
+<p>
+<strong>1.</strong> Primero identifica si la sucesión es aritmética o
+geométrica.
+</p>
+
+<p>
+<strong>2.</strong> En una P.A. se suma o resta una cantidad constante.
+</p>
+
+<p>
+<strong>3.</strong> En una P.G. se multiplica o divide por una cantidad
+constante.
+</p>
+
+<p>
+<strong>4.</strong> Para una P.A. utiliza:
+</p>
+
+<div class="formula">
+
+aₙ = a₁ + (n - 1)d
+
+</div>
+
+<p>
+<strong>5.</strong> Para una P.G. utiliza:
+</p>
+
+<div class="formula">
+
+aₙ = a₁ · rⁿ⁻¹
+
+</div>
+
+<p>
+<strong>6.</strong> Antes de utilizar una fórmula identifica correctamente
+el primer término, la posición y la diferencia o razón.
+</p>
+
+<p>
+<strong>7.</strong> Lee cuidadosamente el problema para determinar si
+se necesita encontrar un término o una suma.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>13. Resumen</h2>
+
+<p>
+Las progresiones son sucesiones numéricas que siguen una regla.
+</p>
+
+<div class="regla">
+
+<h3>Progresión Aritmética</h3>
+
+<p>
+Se suma o resta una cantidad constante llamada diferencia.
+</p>
+
+<div class="formula">
+
+aₙ = a₁ + (n - 1)d
+
+</div>
+
+</div>
+
+<div class="regla">
+
+<h3>Progresión Geométrica</h3>
+
+<p>
+Se multiplica o divide por una cantidad constante llamada razón.
+</p>
+
+<div class="formula">
+
+aₙ = a₁ · rⁿ⁻¹
+
+</div>
+
+</div>
+
+<p>
+Las progresiones permiten reconocer patrones y resolver problemas
+relacionados con cantidades que aumentan o disminuyen de manera regular.
+</p>
+
+</div>
+
+
+
+
+
+
+<div class="botones">
+
+    <a href="1yo.html" class="boton">
+        Volver a Temas
+    </a>
+
+    <a href="index.html" class="boton">
+        Volver al Inicio
+    </a>
+
+</div>
+
+
+</div>
+
+
+
+
+<script>
+
+const canvas = document.getElementById("fondo");
+const ctx = canvas.getContext("2d");
+
+let estrellas = [];
+let simbolos = [];
+
+
+
+
+function ajustarCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+ajustarCanvas();
+
+window.addEventListener("resize", ajustarCanvas);
+
+
+
+
+for(let i = 0; i < 150; i++){
+
+    estrellas.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        radio:Math.random() * 2,
+
+        brillo:Math.random()
+
+    });
+
+}
+
+
+
+
+const signos = [
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+];
+
+
+for(let i = 0; i < 80; i++){
+
+    simbolos.push({
+
+        x:Math.random() * window.innerWidth,
+
+        y:Math.random() * window.innerHeight,
+
+        velocidad:Math.random() * 1.5 + 0.3,
+
+        signo:signos[
+            Math.floor(
+                Math.random() * signos.length
+            )
+        ],
+
+        tamaño:Math.random() * 20 + 12,
+
+        opacidad:Math.random() * 0.5 + 0.2
+
+    });
+
+}
+
+
+
+
+function animar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    
+
+    estrellas.forEach(estrella => {
+
+        ctx.beginPath();
+
+        ctx.arc(
+            estrella.x,
+            estrella.y,
+            estrella.radio,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fillStyle =
+            "rgba(255,255,255," +
+            estrella.brillo +
+            ")";
+
+        ctx.fill();
+
+    });
+
+
+    
+
+    simbolos.forEach(simbolo => {
+
+        ctx.font =
+            simbolo.tamaño +
+            "px Arial";
+
+        ctx.fillStyle =
+            "rgba(0,170,255," +
+            simbolo.opacidad +
+            ")";
+
+        ctx.fillText(
+            simbolo.signo,
+            simbolo.x,
+            simbolo.y
+        );
+
+
+        simbolo.y += simbolo.velocidad;
+
+
+        if(simbolo.y > canvas.height + 30){
+
+            simbolo.y = -30;
+
+            simbolo.x =
+                Math.random() * canvas.width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animar);
+
+}
+
+animar();
+
+</script>
+
+
+</body>
+
+</html>

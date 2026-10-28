@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Números Imaginarios y Complejos - Aprende Matematica</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#000814;
+    color:white;
+    overflow-x:hidden;
+    overflow-y:auto;
+}
+
+
+#fondo{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index:0;
+    background:radial-gradient(circle at center,#0a1f44,#000814);
+}
+
+.encabezado{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 25px;
+}
+
+.encabezado h1{
+    font-size:45px;
+    margin:0 0 10px;
+    color:white;
+    text-shadow:
+        0 0 8px #008cff,
+        0 0 18px #008cff,
+        4px 4px 0 #00152e;
+}
+
+.encabezado p{
+    font-size:20px;
+    margin:0;
+    text-shadow:0 0 8px #008cff;
+}
+
+
+
+.contenido{
+    position:relative;
+    z-index:2;
+    width:85%;
+    max-width:1000px;
+    margin:auto;
+}
+
+
+
+.caja{
+    background:linear-gradient(145deg,#075da8,#003b73);
+    color:white;
+    padding:30px;
+    margin:30px 0;
+    border-radius:20px;
+    border:6px solid #000;
+    box-shadow:
+        8px 10px 0 #000,
+        0 0 20px #008cff;
+}
+
+.caja h2{
+    color:white;
+    font-size:30px;
+    border-bottom:3px solid white;
+    padding-bottom:10px;
+    text-shadow:0 0 8px #00aaff;
+}
+
+.caja h3{
+    color:white;
+    font-size:23px;
+    text-shadow:0 0 6px #00aaff;
+}
+
+
+
+.definicion{
+    background:#0a3970;
+    padding:20px;
+    border-left:6px solid #00aaff;
+    border-radius:10px;
+    box-shadow:0 0 12px #008cff;
+}
+
+
+
+.formula{
+    background:linear-gradient(145deg,#0b72c9,#06447f);
+    padding:20px;
+    margin:15px 0;
+    border-radius:15px;
+    border:4px solid #000;
+    text-align:center;
+    font-size:25px;
+    color:white;
+    font-weight:bold;
+    box-shadow:
+        5px 6px 0 #000,
+        0 0 15px #008cff;
+}
+
+
+
+.ejemplo{
+    background:#062b55;
+    padding:20px;
+    margin:20px 0;
+    border-radius:15px;
+    border:4px solid #000;
+    box-shadow:0 0 12px #008cff;
+}
+
+.paso{
+    background:#0a3d73;
+    color:white;
+    padding:15px;
+    margin:10px 0;
+    border-radius:10px;
+    border-left:5px solid #00aaff;
+    border-top:2px solid #000;
+    border-right:2px solid #000;
+    border-bottom:2px solid #000;
+    font-size:18px;
+    box-shadow:0 0 8px rgba(0,140,255,0.7);
+}
+
+.resultado{
+    background:linear-gradient(145deg,#087fca,#075da8);
+    padding:18px;
+    border-radius:12px;
+    border:4px solid #000;
+    font-size:21px;
+    font-weight:bold;
+    box-shadow:
+        5px 5px 0 #000,
+        0 0 15px #00aaff;
+}
+
+
+
+.regla{
+    padding:15px;
+    background:#082f5c;
+    border-radius:10px;
+    margin:10px 0;
+    border:3px solid #000;
+    box-shadow:0 0 8px #008cff;
+}
+
+
+
+.indicacion{
+    background:#07518f;
+    padding:18px;
+    border-radius:12px;
+    border:4px solid #000;
+    border-left:7px solid #00aaff;
+    box-shadow:0 0 15px #008cff;
+}
+
+
+
+.ejercicio{
+    background:linear-gradient(145deg,#064477,#03294f);
+    color:white;
+    padding:25px;
+    margin:25px 0;
+    border-radius:15px;
+    border:5px solid #000;
+    box-shadow:
+        6px 7px 0 #000,
+        0 0 15px #008cff;
+}
+
+.ejercicio h3{
+    color:white;
+    text-shadow:0 0 8px #00aaff;
+}
+
+
+
+.botones{
+    position:relative;
+    z-index:2;
+    text-align:center;
+    padding:40px 20px 60px;
+}
+
+.boton{
+    padding:15px 30px;
+    border:5px solid #000;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    margin:10px;
+    background:linear-gradient(145deg,#0b72c9,#003b73);
+    color:white;
+    box-shadow:
+        6px 7px 0 #000,
+        0 0 15px #008cff;
+    text-shadow:0 0 7px #00aaff;
+    transition:0.3s;
+}
+
+.boton:hover{
+    transform:translateY(-4px) scale(1.05);
+    background:linear-gradient(145deg,#1294ff,#075da8);
+    box-shadow:
+        7px 8px 0 #000,
+        0 0 25px #00aaff;
+}
+
+.boton:active{
+    transform:translateY(3px);
+    box-shadow:
+        3px 4px 0 #000,
+        0 0 15px #008cff;
+}
+
+
+
+::-webkit-scrollbar{
+    width:14px;
+}
+
+::-webkit-scrollbar-track{
+    background:#000814;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#008cff,#003b73);
+    border:3px solid #000;
+    border-radius:10px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background:#00aaff;
+}
+
+
+
+@media(max-width:700px){
+
+    .encabezado h1{
+        font-size:32px;
+    }
+
+    .encabezado p{
+        font-size:17px;
+    }
+
+    .contenido{
+        width:92%;
+    }
+
+    .caja{
+        padding:20px;
+    }
+
+    .caja h2{
+        font-size:24px;
+    }
+
+    .formula{
+        font-size:20px;
+        overflow-x:auto;
+    }
+
+    .boton{
+        width:90%;
+        margin:12px auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<canvas id="fondo"></canvas>
+
+
+
+
+<div class="encabezado">
+
+    <h1>Números Imaginarios y Complejos</h1>
+
+    <p>
+        tema 2 - 1mer trimestre
+    </p>
+
+</div>
+
+
+
+
+<div class="contenido">
+
+
+
+
+<div class="caja">
+
+<h2>1. Introducción</h2>
+
+<p>
+Los números imaginarios y complejos aparecen cuando necesitamos
+resolver operaciones y ecuaciones que no pueden resolverse
+utilizando solamente los números reales.
+</p>
+
+<p>
+Un ejemplo sencillo es:
+</p>
+
+<div class="formula">
+x² + 1 = 0
+</div>
+
+<p>
+Si despejamos:
+</p>
+
+<div class="paso">
+x² = -1
+</div>
+
+<p>
+Pero ningún número real elevado al cuadrado da como resultado
+un número negativo.
+</p>
+
+<p>
+Para solucionar este tipo de situaciones se utiliza la unidad
+imaginaria <b>i</b>.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>2. La unidad imaginaria</h2>
+
+<p>
+La unidad imaginaria se representa mediante la letra <b>i</b>.
+Se define de la siguiente manera:
+</p>
+
+<div class="formula">
+i = √−1
+</div>
+
+<p>
+Por lo tanto:
+</p>
+
+<div class="formula">
+i² = −1
+</div>
+
+<p>
+Esta propiedad es fundamental para trabajar con números
+imaginarios y complejos.
+</p>
+
+<div class="definicion">
+
+<b>Importante:</b>
+
+<p>
+La unidad imaginaria permite trabajar matemáticamente con
+raíces cuadradas de números negativos.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>3. Números imaginarios</h2>
+
+<p>
+Un número imaginario es un número que contiene la unidad
+imaginaria <b>i</b>.
+</p>
+
+<div class="formula">
+bi
+</div>
+
+<p>
+donde <b>b</b> es un número real.
+</p>
+
+<h3>Ejemplos:</h3>
+
+<div class="regla">
+3i
+</div>
+
+<div class="regla">
+−5i
+</div>
+
+<div class="regla">
+8i
+</div>
+
+<div class="regla">
+12i
+</div>
+
+<p>
+Todos estos son números imaginarios.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>4. Potencias de i</h2>
+
+<p>
+Las potencias de <b>i</b> siguen un patrón que se repite cada
+cuatro potencias.
+</p>
+
+<div class="formula">
+
+i¹ = i
+
+<br><br>
+
+i² = −1
+
+<br><br>
+
+i³ = −i
+
+<br><br>
+
+i⁴ = 1
+
+</div>
+
+<p>
+Después de i⁴ el ciclo vuelve a comenzar:
+</p>
+
+<div class="formula">
+
+i⁵ = i
+
+<br><br>
+
+i⁶ = −1
+
+</div>
+
+<div class="indicacion">
+
+<b>Indicaciones:</b>
+
+<p>
+Cuando tengas una potencia grande de i, puedes dividir el
+exponente entre 4 y utilizar el residuo para encontrar
+el resultado.
+</p>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>5. Ejemplos con potencias de i</h2>
+
+<div class="ejemplo">
+
+<h3>Ejemplo 1: i⁶</h3>
+
+<p>
+Sabemos que:
+</p>
+
+<div class="paso">
+i⁴ = 1
+</div>
+
+<p>
+Entonces:
+</p>
+
+<div class="paso">
+i⁶ = i⁴ · i²
+</div>
+
+<div class="paso">
+i⁶ = 1 · (−1)
+</div>
+
+<div class="resultado">
+i⁶ = −1
+</div>
+
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo 2: i⁷</h3>
+
+<p>
+Descomponemos la potencia:
+</p>
+
+<div class="paso">
+i⁷ = i⁴ · i³
+</div>
+
+<p>
+Sabemos que:
+</p>
+
+<div class="paso">
+
+i⁴ = 1
+
+<br><br>
+
+i³ = −i
+
+</div>
+
+<p>
+Entonces:
+</p>
+
+<div class="paso">
+i⁷ = 1(−i)
+</div>
+
+<div class="resultado">
+i⁷ = −i
+</div>
+
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo 3: i¹⁰</h3>
+
+<p>
+Descomponemos:
+</p>
+
+<div class="paso">
+i¹⁰ = i⁸ · i²
+</div>
+
+<p>
+Como:
+</p>
+
+<div class="paso">
+i⁸ = 1
+</div>
+
+<p>
+Entonces:
+</p>
+
+<div class="paso">
+i¹⁰ = 1(−1)
+</div>
+
+<div class="resultado">
+i¹⁰ = −1
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>6. Números complejos</h2>
+
+<p>
+Un número complejo está formado por una parte real y una parte
+imaginaria.
+</p>
+
+<div class="formula">
+z = a + bi
+</div>
+
+<p>
+Donde:
+</p>
+
+<div class="regla">
+<b>a</b> = parte real.
+</div>
+
+<div class="regla">
+<b>b</b> = coeficiente de la parte imaginaria.
+</div>
+
+<div class="regla">
+<b>i</b> = unidad imaginaria.
+</div>
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+z = 5 + 3i
+</div>
+
+<p>
+La parte real es <b>5</b> y la parte imaginaria es <b>3i</b>.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>7. Representación de un número complejo</h2>
+
+<p>
+Los números complejos pueden representarse mediante dos partes:
+</p>
+
+<div class="regla">
+
+<b>Eje real:</b> representa la parte real.
+
+</div>
+
+<div class="regla">
+
+<b>Eje imaginario:</b> representa la parte imaginaria.
+
+</div>
+
+<p>
+Por ejemplo:
+</p>
+
+<div class="formula">
+z = 3 + 2i
+</div>
+
+<p>
+El número se representa mediante el punto:
+</p>
+
+<div class="formula">
+(3 , 2)
+</div>
+
+<p>
+El primer valor corresponde a la parte real y el segundo a la
+parte imaginaria.
+</p>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>8. Suma de números complejos</h2>
+
+<p>
+Para sumar números complejos debemos sumar las partes reales
+entre sí y las partes imaginarias entre sí.
+</p>
+
+<div class="formula">
+
+(a + bi) + (c + di)
+
+<br><br>
+
+= (a + c) + (b + d)i
+
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+(3 + 4i) + (5 + 2i)
+</div>
+
+<p>
+<b>Paso 1:</b> Sumamos las partes reales.
+</p>
+
+<div class="paso">
+3 + 5 = 8
+</div>
+
+<p>
+<b>Paso 2:</b> Sumamos las partes imaginarias.
+</p>
+
+<div class="paso">
+4i + 2i = 6i
+</div>
+
+<p>
+<b>Paso 3:</b> Unimos los resultados.
+</p>
+
+<div class="paso">
+8 + 6i
+</div>
+
+<div class="resultado">
+Resultado: 8 + 6i
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>9. Resta de números complejos</h2>
+
+<p>
+Para restar números complejos realizamos el mismo procedimiento:
+restamos las partes reales y después las partes imaginarias.
+</p>
+
+<div class="formula">
+
+(a + bi) − (c + di)
+
+<br><br>
+
+= (a − c) + (b − d)i
+
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+(8 + 7i) − (3 + 2i)
+</div>
+
+<p>
+<b>Paso 1:</b> Restamos las partes reales.
+</p>
+
+<div class="paso">
+8 − 3 = 5
+</div>
+
+<p>
+<b>Paso 2:</b> Restamos las partes imaginarias.
+</p>
+
+<div class="paso">
+7i − 2i = 5i
+</div>
+
+<p>
+<b>Paso 3:</b>
+</p>
+
+<div class="paso">
+5 + 5i
+</div>
+
+<div class="resultado">
+Resultado: 5 + 5i
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>10. Multiplicación de números complejos</h2>
+
+<p>
+Para multiplicar números complejos utilizamos la propiedad
+distributiva.
+</p>
+
+<p>
+Debemos recordar que:
+</p>
+
+<div class="formula">
+i² = −1
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+(2 + 3i)(4 + 5i)
+</div>
+
+<p>
+<b>Paso 1:</b> Multiplicamos cada término.
+</p>
+
+<div class="paso">
+2(4) + 2(5i) + 3i(4) + 3i(5i)
+</div>
+
+<p>
+<b>Paso 2:</b> Realizamos las multiplicaciones.
+</p>
+
+<div class="paso">
+8 + 10i + 12i + 15i²
+</div>
+
+<p>
+<b>Paso 3:</b> Como i² = −1:
+</p>
+
+<div class="paso">
+8 + 10i + 12i + 15(−1)
+</div>
+
+<p>
+<b>Paso 4:</b> Reducimos términos semejantes.
+</p>
+
+<div class="paso">
+8 − 15 + 22i
+</div>
+
+<div class="paso">
+−7 + 22i
+</div>
+
+<div class="resultado">
+Resultado: −7 + 22i
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>11. División de números complejos</h2>
+
+<p>
+Para dividir números complejos utilizamos el conjugado del
+denominador.
+</p>
+
+<h3>Conjugado</h3>
+
+<p>
+El conjugado de:
+</p>
+
+<div class="formula">
+a + bi
+</div>
+
+<p>
+es:
+</p>
+
+<div class="formula">
+a − bi
+</div>
+
+<p>
+Al multiplicar un número complejo por su conjugado obtenemos
+un número real.
+</p>
+
+<div class="formula">
+(a + bi)(a − bi) = a² + b²
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+(3 + 2i) / (1 + i)
+</div>
+
+<p>
+<b>Paso 1:</b> Buscamos el conjugado del denominador.
+</p>
+
+<div class="paso">
+Conjugado de 1 + i = 1 − i
+</div>
+
+<p>
+<b>Paso 2:</b> Multiplicamos numerador y denominador por
+el conjugado.
+</p>
+
+<div class="paso">
+(3 + 2i)(1 − i)
+<br><br>
+————————————
+<br><br>
+(1 + i)(1 − i)
+</div>
+
+<p>
+<b>Paso 3:</b> Resolvemos el numerador.
+</p>
+
+<div class="paso">
+3 − 3i + 2i − 2i²
+</div>
+
+<p>
+Como i² = −1:
+</p>
+
+<div class="paso">
+3 − i + 2
+</div>
+
+<div class="paso">
+5 − i
+</div>
+
+<p>
+<b>Paso 4:</b> Resolvemos el denominador.
+</p>
+
+<div class="paso">
+1 − i²
+</div>
+
+<div class="paso">
+1 − (−1) = 2
+</div>
+
+<p>
+<b>Paso 5:</b> Escribimos el resultado.
+</p>
+
+<div class="paso">
+(5 − i) / 2
+</div>
+
+<div class="resultado">
+Resultado: 5/2 − 1/2i
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>12. Módulo de un número complejo</h2>
+
+<p>
+El módulo representa la distancia desde el origen hasta el punto
+que representa al número complejo.
+</p>
+
+<p>
+Para:
+</p>
+
+<div class="formula">
+z = a + bi
+</div>
+
+<p>
+el módulo se calcula mediante:
+</p>
+
+<div class="formula">
+|z| = √(a² + b²)
+</div>
+
+
+<div class="ejemplo">
+
+<h3>Ejemplo:</h3>
+
+<div class="formula">
+z = 3 + 4i
+</div>
+
+<p>
+<b>Paso 1:</b> Identificamos los valores.
+</p>
+
+<div class="paso">
+
+a = 3
+
+<br><br>
+
+b = 4
+
+</div>
+
+<p>
+<b>Paso 2:</b> Aplicamos la fórmula.
+</p>
+
+<div class="paso">
+|z| = √(3² + 4²)
+</div>
+
+<p>
+<b>Paso 3:</b>
+</p>
+
+<div class="paso">
+|z| = √(9 + 16)
+</div>
+
+<div class="paso">
+|z| = √25
+</div>
+
+<div class="paso">
+|z| = 5
+</div>
+
+<div class="resultado">
+Módulo = 5
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>13. Ejercicios de mayor dificultad</h2>
+
+<div class="indicacion">
+
+<b>Indicaciones:</b>
+
+<p>
+Estos ejercicios reúnen diferentes operaciones con números
+imaginarios y complejos.
+</p>
+
+<p>
+Recuerda utilizar siempre:
+</p>
+
+<div class="formula">
+i² = −1
+</div>
+
+<p>
+Organiza cada operación por pasos y reduce los términos
+semejantes antes de obtener el resultado final.
+</p>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 1</h3>
+
+<div class="formula">
+(4 + 3i) + (7 − 5i) − (2 + i)
+</div>
+
+<p>
+<b>Paso 1:</b> Agrupamos las partes reales.
+</p>
+
+<div class="paso">
+4 + 7 − 2 = 9
+</div>
+
+<p>
+<b>Paso 2:</b> Agrupamos las partes imaginarias.
+</p>
+
+<div class="paso">
+3i − 5i − i = −3i
+</div>
+
+<p>
+<b>Paso 3:</b> Unimos ambas partes.
+</p>
+
+<div class="resultado">
+Resultado: 9 − 3i
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 2</h3>
+
+<div class="formula">
+(3 + 2i)(5 − 4i)
+</div>
+
+<p>
+<b>Paso 1:</b> Aplicamos la propiedad distributiva.
+</p>
+
+<div class="paso">
+3(5) + 3(−4i) + 2i(5) + 2i(−4i)
+</div>
+
+<p>
+<b>Paso 2:</b> Multiplicamos.
+</p>
+
+<div class="paso">
+15 − 12i + 10i − 8i²
+</div>
+
+<p>
+<b>Paso 3:</b> Utilizamos i² = −1.
+</p>
+
+<div class="paso">
+15 − 12i + 10i + 8
+</div>
+
+<p>
+<b>Paso 4:</b> Reducimos términos semejantes.
+</p>
+
+<div class="paso">
+23 − 2i
+</div>
+
+<div class="resultado">
+Resultado: 23 − 2i
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 3</h3>
+
+<div class="formula">
+(2 − 3i)²
+</div>
+
+<p>
+<b>Paso 1:</b> Escribimos la multiplicación.
+</p>
+
+<div class="paso">
+(2 − 3i)(2 − 3i)
+</div>
+
+<p>
+<b>Paso 2:</b> Aplicamos la propiedad distributiva.
+</p>
+
+<div class="paso">
+4 − 6i − 6i + 9i²
+</div>
+
+<p>
+<b>Paso 3:</b> Reemplazamos i² por −1.
+</p>
+
+<div class="paso">
+4 − 12i − 9
+</div>
+
+<p>
+<b>Paso 4:</b> Simplificamos.
+</p>
+
+<div class="paso">
+−5 − 12i
+</div>
+
+<div class="resultado">
+Resultado: −5 − 12i
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 4: Potencia de i</h3>
+
+<div class="formula">
+i²⁷
+</div>
+
+<p>
+<b>Paso 1:</b> Dividimos el exponente entre 4.
+</p>
+
+<div class="paso">
+
+27 ÷ 4 = 6
+
+<br><br>
+
+Residuo = 3
+
+</div>
+
+<p>
+<b>Paso 2:</b> Utilizamos el residuo 3.
+</p>
+
+<div class="paso">
+i³ = −i
+</div>
+
+<div class="resultado">
+Resultado: i²⁷ = −i
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 5: Operación combinada</h3>
+
+<div class="formula">
+(2 + i)(3 − 2i) + (4 − 3i)
+</div>
+
+<p>
+<b>Paso 1:</b> Multiplicamos los primeros paréntesis.
+</p>
+
+<div class="paso">
+6 − 4i + 3i − 2i²
+</div>
+
+<p>
+<b>Paso 2:</b> Sustituimos i² = −1.
+</p>
+
+<div class="paso">
+6 − 4i + 3i + 2
+</div>
+
+<p>
+<b>Paso 3:</b> Reducimos.
+</p>
+
+<div class="paso">
+8 − i
+</div>
+
+<p>
+<b>Paso 4:</b> Sumamos el segundo número complejo.
+</p>
+
+<div class="paso">
+(8 − i) + (4 − 3i)
+</div>
+
+<div class="paso">
+12 − 4i
+</div>
+
+<div class="resultado">
+Resultado: 12 − 4i
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 6: Módulo</h3>
+
+<div class="formula">
+z = −6 + 8i
+</div>
+
+<p>
+<b>Paso 1:</b> Aplicamos la fórmula del módulo.
+</p>
+
+<div class="paso">
+|z| = √(a² + b²)
+</div>
+
+<p>
+<b>Paso 2:</b> Reemplazamos los valores.
+</p>
+
+<div class="paso">
+|z| = √((-6)² + 8²)
+</div>
+
+<p>
+<b>Paso 3:</b> Calculamos los cuadrados.
+</p>
+
+<div class="paso">
+|z| = √(36 + 64)
+</div>
+
+<p>
+<b>Paso 4:</b>
+</p>
+
+<div class="paso">
+|z| = √100
+</div>
+
+<div class="resultado">
+Resultado: |z| = 10
+</div>
+
+</div>
+
+
+<div class="ejercicio">
+
+<h3>Ejercicio 7: Reto final</h3>
+
+<div class="formula">
+(1 + 2i)(3 + 4i) − (2 − i)
+</div>
+
+<p>
+<b>Paso 1:</b> Multiplicamos los primeros términos.
+</p>
+
+<div class="paso">
+3 + 4i + 6i + 8i²
+</div>
+
+<p>
+<b>Paso 2:</b> Sustituimos i² = −1.
+</p>
+
+<div class="paso">
+3 + 10i − 8
+</div>
+
+<div class="paso">
+−5 + 10i
+</div>
+
+<p>
+<b>Paso 3:</b> Restamos el segundo número complejo.
+</p>
+
+<div class="paso">
+(−5 + 10i) − (2 − i)
+</div>
+
+<p>
+<b>Paso 4:</b> Distribuimos el signo negativo.
+</p>
+
+<div class="paso">
+−5 + 10i − 2 + i
+</div>
+
+<p>
+<b>Paso 5:</b> Reducimos términos semejantes.
+</p>
+
+<div class="paso">
+−7 + 11i
+</div>
+
+<div class="resultado">
+Resultado final: −7 + 11i
+</div>
+
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>14. Indicaciones importantes</h2>
+
+<div class="regla">
+Recuerda siempre que i² = −1.
+</div>
+
+<div class="regla">
+Separa la parte real de la parte imaginaria.
+</div>
+
+<div class="regla">
+Reduce términos semejantes.
+</div>
+
+<div class="regla">
+En las multiplicaciones utiliza la propiedad distributiva.
+</div>
+
+<div class="regla">
+En las divisiones utiliza el conjugado del denominador.
+</div>
+
+<div class="regla">
+En las potencias de i utiliza el ciclo de cuatro valores.
+</div>
+
+<div class="regla">
+Realiza las operaciones paso a paso.
+</div>
+
+</div>
+
+
+
+
+<div class="caja">
+
+<h2>15. Resumen del tema</h2>
+
+<p>
+Los números imaginarios permiten trabajar con raíces cuadradas
+de números negativos.
+</p>
+
+<div class="formula">
+
+i = √−1
+
+<br><br>
+
+i² = −1
+
+</div>
+
+<p>
+Los números complejos tienen la forma:
+</p>
+
+<div class="formula">
+z = a + bi
+</div>
+
+<p>
+Para trabajar con números complejos debemos aprender a sumar,
+restar, multiplicar y dividir sus partes correctamente.
+</p>
+
+<p>
+También podemos calcular su módulo y representar los números
+complejos mediante un plano con una parte real y una parte
+imaginaria.
+</p>
+
+<div class="resultado">
+
+Objetivo principal: comprender y operar correctamente con
+números imaginarios y complejos.
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="botones"> 
+ 
+<button class="boton" onclick="location.href='1yo.html'"> 
+ 
+Volver a Temas 
+ 
+</button> 
+ 
+<button class="boton" onclick="location.href='index.html'"> 
+ 
+Inicio 
+ 
+</button> 
+ 
+</div>
+
+
+
+<script>
+
+const canvas = document.getElementById("fondo");
+const ctx = canvas.getContext("2d");
+
+let estrellas = [];
+let simbolos = [];
+
+
+
+
+function ajustarCanvas(){
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+}
+
+ajustarCanvas();
+
+window.addEventListener("resize", ajustarCanvas);
+
+
+
+
+for(let i = 0; i < 150; i++){
+
+    estrellas.push({
+
+        x:Math.random() * window.innerWidth,
+        y:Math.random() * window.innerHeight,
+        tamaño:Math.random() * 2 + 0.5,
+        brillo:Math.random()
+
+    });
+
+}
+
+
+
+
+const signos = [
+    "+",
+    "-",
+    "×",
+    "÷",
+    "=",
+    "π",
+    "√",
+    "∞",
+    "∑"
+];
+
+for(let i = 0; i < 80; i++){
+
+    simbolos.push({
+
+        x:Math.random() * window.innerWidth,
+        y:Math.random() * window.innerHeight,
+        velocidad:Math.random() * 1.5 + 0.5,
+        tamaño:Math.random() * 14 + 12,
+        signo:signos[Math.floor(Math.random() * signos.length)]
+
+    });
+
+}
+
+
+
+
+function animar(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    
+
+    estrellas.forEach(estrella => {
+
+        ctx.fillStyle =
+            "rgba(255,255,255," +
+            (0.3 + estrella.brillo * 0.7) +
+            ")";
+
+        ctx.beginPath();
+
+        ctx.arc(
+            estrella.x,
+            estrella.y,
+            estrella.tamaño,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+
+    });
+
+
+    
+
+    simbolos.forEach(simbolo => {
+
+        ctx.font = simbolo.tamaño + "px Arial";
+
+        ctx.fillStyle =
+            "rgba(0,160,255,0.65)";
+
+        ctx.fillText(
+            simbolo.signo,
+            simbolo.x,
+            simbolo.y
+        );
+
+        simbolo.y += simbolo.velocidad;
+
+
+        if(simbolo.y > canvas.height + 30){
+
+            simbolo.y = -30;
+
+            simbolo.x =
+                Math.random() * canvas.width;
+
+        }
+
+    });
+
+
+    requestAnimationFrame(animar);
+
+}
+
+animar();
+
+</script>
+
+</body>
+
+</html>
